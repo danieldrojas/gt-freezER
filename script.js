@@ -3,9 +3,13 @@ function getIceCreamStores(loc) {
   if (loc && loc.latitude) {
     data.latitude = loc.latitude;
     data.longitude = loc.longitude;
-  } else if (loc){
-    if (loc.length === 5){
-      data.location = loc
+  } else if (loc) {
+    if (loc.length === 5 && Number(loc)) {
+      data.location = loc;
+    }
+    if (!(data.lattitude && data.longitude) && !data.location) {
+      alert("Please enter a valid Zip Code.");
+      return;
     }
   }
   var URL =
@@ -34,11 +38,11 @@ $(document).ready(function () {
     locationErrorHandler,
     options
   );
-  $("#zipcode-submit").on("click", function(){
+  $("#zipcode-submit").on("click", function () {
     var zipcode = $("#zipcode-input").val();
     console.log(zipcode);
     getIceCreamStores(zipcode);
-  })
+  });
 });
 
 // pulled following location data from
