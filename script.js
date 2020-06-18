@@ -29,6 +29,16 @@ function getIceCreamStores(loc) {
     error: function (error) {
       console.log(error);
     },
+  }).then(function (response) {
+    $("#iceCreamStores").empty();
+    for (var i = 0; i < 10; i++) {
+      var iceCreamStores = response.businesses[i].name;
+      console.log(iceCreamStores);
+      var storeList = $("<button>").text(iceCreamStores);
+      $(storeList).attr("class", "btn-block newIceCreamStoreButton");
+      var listItem = $("<li>").append(storeList);
+      $("#iceCreamStores").append(listItem);
+    }
   });
 }
 
@@ -40,7 +50,6 @@ $(document).ready(function () {
   );
   $("#zipcode-submit").on("click", function () {
     var zipcode = $("#zipcode-input").val();
-    console.log(zipcode);
     getIceCreamStores(zipcode);
   });
 });
