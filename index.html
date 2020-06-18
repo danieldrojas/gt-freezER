@@ -1,13 +1,85 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>freezER</title>
-</head>
-<body>
-    <h1>Hello World!</h1>
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+      integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk"
+      crossorigin="anonymous"
+    />
+  </head>
+  <body>
+    <header id="freezer-title">
+      <div class="row">
+        <div class="col-sm-12">
+          <h1>freezER</h1>
+        </div>
+      </div>
+    </header>
+    <main>
+      <div class="row">
+        <div class="col-sm-4" class="search-area" id="left-col">
+          <div class="jumbotron">
+            <div class="input-group mb-3">
+              <input
+                type="text"
+                class="form-control"
+                placeholder="Search by Zip Code"
+                aria-label="Zip Code"
+                aria-describedby="button-addon2"
+                id="zipcode-input"
+              />
+              <div class="input-group-append">
+                <button
+                  class="btn btn-outline-secondary"
+                  type="button"
+                  id="zipcode-submit"
+                >
+                  Button
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-sm-4" class="timer-area" id="middle-col">
+          <div class="jumbotron">
+            <div class="row">
+              <p>Section 1 Middle</p>
+            </div>
+            <div class="row">
+              <p>Section 2 Middle</p>
+            </div>
+            <div class="row">
+              <p>Section 3 Middle</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-sm-4" class="map-area" id="right-col">
+          <div class="jumbotron">
+            <p>Section 1 Right</p>
+          </div>
+        </div>
+      </div>
+    </main>
+    <script
+      src="https://code.jquery.com/jquery-3.5.1.min.js"
+      integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0="
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+      integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"
+      integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI"
+      crossorigin="anonymous"
+    ></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="script.js"></script>
-</body>
+  </body>
 </html>
