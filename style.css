@@ -1,0 +1,11 @@
+header {
+    text-align: center;
+}
+
+#iceCreamStores {
+    list-style-type: none;
+}
+
+.newIceCreamStoreButton {
+    padding: 20px;
+}
