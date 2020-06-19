@@ -71,7 +71,7 @@ function getIceCreamStores(loc) {
       console.log(error);
     },
   }).then(function (response) {
-    // console.log(response);
+    console.log(response);
     $("#iceCreamStores").empty();
     for (var i = 0; i < 10; i++) {
       var iceCreamStores = response.businesses[i].name;
@@ -102,10 +102,8 @@ function getIceCreamStores(loc) {
         url: myURL,
         method: "GET",
       }).then(function (response) {
-        // console.log(response);
-        var distance = response.route.distance;
-        var time = response.route.time;
-        // console.log(time);
+        console.log(response);
+
       });
     }
   });
