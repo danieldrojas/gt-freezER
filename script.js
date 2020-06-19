@@ -34,7 +34,7 @@ function getIceCreamStores(loc) {
     $("#iceCreamStores").empty();
     for (var i = 0; i < 10; i++) {
       var iceCreamStores = response.businesses[i].name;
-      var storeAddress = response.businesses[i].location.address1
+      var storeAddress = response.businesses[i].location.address1;
       console.log(storeAddress);
       console.log(iceCreamStores);
       var storeList = $("<button>").text(iceCreamStores);
@@ -42,6 +42,25 @@ function getIceCreamStores(loc) {
       var listItem = $("<li>").append(storeList);
       $("#iceCreamStores").append(listItem);
     }
+  });
+  var mapQuestKey = "bDYO5JVsT0lGPolecMUk1lCGVNostBHT";
+  var pointA = "";
+  var pointB = "";
+
+  var myURL =
+    "http://www.mapquestapi.com/directions/v2/route?key=bDYO5JVsT0lGPolecMUk1lCGVNostBHT&from=" +
+    pointA +
+    "&to=" +
+    pointB;
+
+  $.ajax({
+    url: myURL,
+    method: "GET",
+  }).then(function (response) {
+    console.log(response);
+    var distance = response.route.distance;
+    var time = response.route.time;
+    console.log(time);
   });
 }
 
