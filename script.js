@@ -78,8 +78,14 @@ function getIceCreamStores(loc) {
       var storeAddress = response.businesses[i].location.address1;
       // console.log(storeAddress);
       // console.log(iceCreamStores);
+      var iceCreamDistance = ("distancw")
+      var timeToDistance = ("time")
       var storeList = $("<button>").text(iceCreamStores);
       $(storeList).attr("class", "btn-block newIceCreamStoreButton");
+      storeList.append($("<div>" + storeAddress + "</div>"));
+      storeList.append($("<div>" + iceCreamDistance + "</div>"));
+      storeList.append($("<div>" + timeToDistance + "</div>"));
+
       var listItem = $("<li>").append(storeList);
       $("#iceCreamStores").append(listItem);
       var latPointB = response.businesses[i].coordinates.latitude;
@@ -91,6 +97,18 @@ function getIceCreamStores(loc) {
       var mapQuestKey = "bDYO5JVsT0lGPolecMUk1lCGVNostBHT";
       var pointA = startingPos;
       var pointB = destinationPos;
+
+//change
+      //this add the image to the main col. In the event of click on the button
+      var image = response.businesses[i].image_url
+      console.log(image)
+
+      var imgDiv = $("<img>")
+      imgDiv.attr('src', image)
+      $("#icecream-img").append(imgDiv)
+
+
+
 
       var myURL =
         "http://www.mapquestapi.com/directions/v2/route?key=bDYO5JVsT0lGPolecMUk1lCGVNostBHT&from=" +
