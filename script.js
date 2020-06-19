@@ -1,5 +1,6 @@
+var userLocation;
 $(document).ready(function () {
-  navigator.geolocation.getCurrentPosition(
+  userLocation = navigator.geolocation.getCurrentPosition(
     locationHandler,
     locationErrorHandler,
     options
@@ -8,8 +9,9 @@ $(document).ready(function () {
     var zipcode = $("#zipcode-input").val();
     getIceCreamStores(zipcode);
   });
+  return userLocation;
 });
-
+// console.log(userLocation);
 // pulled following location data from
 // https://developer.mozilla.org/en-US/docs/Web/API/Geolocation/getCurrentPosition
 
@@ -20,18 +22,16 @@ var options = {
 };
 
 function locationHandler(pos) {
-  crd = pos.coords;
-  console.log(crd);
-  console.log(crd.latitude);
-  console.log(crd.longitude);
+  var crd = pos.coords;
+  // console.log(crd);
+  // console.log(crd.latitude);
+  // console.log(crd.longitude);
   getIceCreamStores(crd);
-  // var latPointA = crd.latitude;
-  // var lonPointA = crd.longitude;
+
   console.log("Your current position is:");
   console.log("Latitude: " + crd.latitude);
   console.log("Longitude: " + crd.longitude);
 }
-
 function locationErrorHandler(err) {
   console.warn(`ERROR(${err.code}): ${err.message}`);
 }
@@ -50,6 +50,9 @@ function getIceCreamStores(loc) {
       return;
     }
   }
+  // console.log(loc);
+  var latPointA = loc.latitude;
+  var lonPointA = loc.longitude;
   var URL =
     "https://cors-anywhere.herokuapp.com/https://api.yelp.com/v3/businesses/search?";
   var APIkey =
@@ -68,7 +71,7 @@ function getIceCreamStores(loc) {
       console.log(error);
     },
   }).then(function (response) {
-    console.log(response);
+    // console.log(response);
     $("#iceCreamStores").empty();
     for (var i = 0; i < 10; i++) {
       var iceCreamStores = response.businesses[i].name;
@@ -81,14 +84,12 @@ function getIceCreamStores(loc) {
       $("#iceCreamStores").append(listItem);
       var latPointB = response.businesses[i].coordinates.latitude;
       var lonPointB = response.businesses[i].coordinates.longitude;
-      
-      // locationHandler();
-      // var startingPos = latPointA + "," + lonPointA;
+      var startingPos = latPointA + "," + lonPointA;
       var destinationPos = latPointB + "," + lonPointB;
-      // console.log(startingPos);
-      console.log(destinationPos);
+      console.log("Starting: ",startingPos);
+      console.log("Destination: ",destinationPos);
       var mapQuestKey = "bDYO5JVsT0lGPolecMUk1lCGVNostBHT";
-      var pointA = "";
+      var pointA = startingPos;
       var pointB = destinationPos;
 
       var myURL =
