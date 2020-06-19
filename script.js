@@ -74,31 +74,48 @@ function getIceCreamStores(loc) {
   }).then(function (response) {
     // console.log(response);
     $("#iceCreamStores").empty();
-    for (var i = 0; i < 10; i++) {
-      var iceCreamStores = response.businesses[i].name;
-      var storeAddress = response.businesses[i].location.address1;
-      // console.log(storeAddress);
-      // console.log(iceCreamStores);
-      storeList = $("<button>").text(iceCreamStores);
-      $(storeList).attr("class", "btn-block newIceCreamStoreButton");
-      storeList.append($("<div>" + storeAddress + "</div>"));
 
-      var listItem = $("<li>").append(storeList);
-      $("#iceCreamStores").append(listItem);
-      var latPointB = response.businesses[i].coordinates.latitude;
-      var lonPointB = response.businesses[i].coordinates.longitude;
-      var startingPos = latPointA + "," + lonPointA;
-      var destinationPos = latPointB + "," + lonPointB;
-      console.log("Starting: ", startingPos);
-      console.log("Destination: ", destinationPos);
-      var mapQuestKey = "bDYO5JVsT0lGPolecMUk1lCGVNostBHT";
-      var pointA = startingPos;
-      var pointB = destinationPos;
+    
+      
+    
+      for (var i = 0; i < 10; i++) {
+        var iceCreamStores = response.businesses[i].name;
+        var storeAddress = response.businesses[i].location.address1;
+        // console.log(storeAddress);
+        // console.log(iceCreamStores);
+      
+        
+        function createsButtons(distance, time) {
 
-      //change
-      //this add the image to the main col. In the event of click on the button
-      var image = response.businesses[i].image_url;
-      console.log(image);
+          var storeList = $("<button>").text(iceCreamStores);
+
+          $(storeList).attr("class", "btn-block newIceCreamStoreButton");
+          storeList.append($("<div>" + storeAddress + "</div>"));
+          storeList.append($("<div>" + "Miles: " + distance + "</div>"));
+          storeList.append($("<div>" + "Time: " + time + "</div>"));
+
+          var listItem = $("<li>").append(storeList);
+          $("#iceCreamStores").append(listItem);
+        }
+        var latPointB = response.businesses[i].coordinates.latitude;
+        var lonPointB = response.businesses[i].coordinates.longitude;
+        var startingPos = latPointA + "," + lonPointA;
+        var destinationPos = latPointB + "," + lonPointB;
+        console.log("Starting: ", startingPos);
+        console.log("Destination: ", destinationPos);
+        var mapQuestKey = "bDYO5JVsT0lGPolecMUk1lCGVNostBHT";
+        var pointA = startingPos;
+        var pointB = destinationPos;
+
+        //change
+        //this add the image to the main col. In the event of click on the button
+        var image = response.businesses[i].image_url
+
+        var imgDiv = $("<img>")
+        imgDiv.attr('src', image)
+        $("#icecream-img").append(imgDiv)
+
+      
 
       var imgDiv = $("<img>");
       imgDiv.attr("src", image);
@@ -114,12 +131,12 @@ function getIceCreamStores(loc) {
         url: myURL,
         method: "GET",
       }).then(function (response) {
-
-        var iceCreamDistance = response.route.distance;
-        // var timeToDistance = response.route.formattedTime;
+        // console.log(response);
+        var distance = response.route.distance;
+        var time = (response.route.formattedTime).split(":");
+        createsButtons(distance, `${time[1]}: ${time[2] }`);
         
-        storeList.append("<div>" + iceCreamDistance + "</div>");
-        // storeList.append($("<div>" + timeToDistance + "</div>"));
+        
       });
     }
   });
