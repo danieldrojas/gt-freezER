@@ -30,9 +30,12 @@ function getIceCreamStores(loc) {
       console.log(error);
     },
   }).then(function (response) {
+    console.log(response);
     $("#iceCreamStores").empty();
     for (var i = 0; i < 10; i++) {
       var iceCreamStores = response.businesses[i].name;
+      var storeAddress = response.businesses[i].location.address1
+      console.log(storeAddress);
       console.log(iceCreamStores);
       var storeList = $("<button>").text(iceCreamStores);
       $(storeList).attr("class", "btn-block newIceCreamStoreButton");
