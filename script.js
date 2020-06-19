@@ -56,7 +56,7 @@ function getIceCreamStores(loc) {
       $("#icecream-img").append(imgDiv)
        
 
- $()
+ 
 
       
    
