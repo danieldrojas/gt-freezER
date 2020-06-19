@@ -30,15 +30,48 @@ function getIceCreamStores(loc) {
       console.log(error);
     },
   }).then(function (response) {
+    console.log(response);
     $("#iceCreamStores").empty();
     for (var i = 0; i < 10; i++) {
       var iceCreamStores = response.businesses[i].name;
-      console.log(iceCreamStores);
+      var storeAddress = response.businesses[i].location.address1;
+      var iceCreamDistance = ("distance")
+      var timeToDistance = ("trip")
+      // console.log(storeAddress);
+      // console.log(iceCreamStores);
       var storeList = $("<button>").text(iceCreamStores);
+      storeList.append($("<div>"+ storeAddress + "</div>"));
+      storeList.append($("<div>"+ iceCreamDistance + "</div>"));
+      storeList.append($("<div>"+ timeToDistance + "</div>"));
       $(storeList).attr("class", "btn-block newIceCreamStoreButton");
       var listItem = $("<li>").append(storeList);
-      $("#iceCreamStores").append(listItem);
+      $("#iceCreamStores").append(listItem)
+
+
+
+
+      
+      
     }
+  });
+  var mapQuestKey = "bDYO5JVsT0lGPolecMUk1lCGVNostBHT";
+  var pointA = "";
+  var pointB = "";
+
+  var myURL =
+    "http://www.mapquestapi.com/directions/v2/route?key=bDYO5JVsT0lGPolecMUk1lCGVNostBHT&from=" +
+    pointA +
+    "&to=" +
+    pointB;
+
+  $.ajax({
+    url: myURL,
+    method: "GET",
+  }).then(function (response) {
+    console.log(response);
+    var distance = response.route.distance;
+    var time = response.route.time;
+    console.log(time);
   });
 }
 
