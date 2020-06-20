@@ -1,4 +1,5 @@
 var userLocation;
+var routeList = [];
 $(document).ready(function () {
   userLocation = navigator.geolocation.getCurrentPosition(
     locationHandler,
@@ -82,6 +83,10 @@ function getIceCreamStores(loc) {
       var timeToDistance = ("time")
       var storeList = $("<button>").text(iceCreamStores);
       $(storeList).attr("class", "btn-block newIceCreamStoreButton");
+
+      // adding new id to each button
+      storeList.attr("id", iceCreamStores);
+      
       storeList.append($("<div>" + storeAddress + "</div>"));
       storeList.append($("<div>" + iceCreamDistance + "</div>"));
       storeList.append($("<div>" + timeToDistance + "</div>"));
@@ -120,7 +125,7 @@ function getIceCreamStores(loc) {
         url: myURL,
         method: "GET",
       }).then(function (response) {
-        console.log(response);
+        // console.log(response);
 
       });
     }
