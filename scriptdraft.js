@@ -104,15 +104,15 @@ function getIceCreamStores(loc) {
       var latPointB = response.businesses[i].coordinates.latitude;
       var lonPointB = response.businesses[i].coordinates.longitude;
       var destinationPos = latPointB + "," + lonPointB;
-      console.log("Destination: ", destinationPos);
+    //   console.log("Destination: ", destinationPos);
       routeArray.push(destinationPos);
     }
-    console.log(routeArray);
+    
 
     var mapQuestKey = "bDYO5JVsT0lGPolecMUk1lCGVNostBHT";
 
     for (var i = 0; i < routeArray.length; i++) {
-      console.log(routeArray[i]);
+    //   console.log(routeArray[i]);
       var pointB = routeArray[i];
 
       // var pointB = destinationPos;
@@ -128,9 +128,11 @@ function getIceCreamStores(loc) {
         method: "GET",
       }).then(function (response) {
         var travelTime = response.route.realTime;
-        console.log(travelTime);
-        //   timeArray.push(travelTime);
+        // console.log(travelTime);
+        timeArray.push(travelTime);
       });
     }
   });
 }
+console.log(routeArray);
+console.log(timeArray);
