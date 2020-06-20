@@ -85,11 +85,22 @@ function getIceCreamStores(loc) {
     var storeNine = response.businesses[8].name;
     var storeTen = response.businesses[9].name;
 
+    // console.log(storeOne);
+    // console.log(storeTwo);
+    // console.log(storeThree);
+    // console.log(storeFour);
+    // console.log(storeFive);
+    // console.log(storeSix);
+    // console.log(storeSeven);
+    // console.log(storeEight);
+    // console.log(storeNine);
+    // console.log(storeTen);
+
     for (var i = 0; i < 10; i++) {
       var iceCreamStores = response.businesses[i].name;
       var storeList = $("<button>").text(iceCreamStores);
       $(storeList).attr("class", "btn-block newIceCreamStoreButton");
-      storeList.attr("id", iceCreamStores);
+      storeList.attr("id", i);
       var listItem = $("<li>").append(storeList);
       $("#iceCreamStores").append(listItem);
     }
@@ -104,15 +115,14 @@ function getIceCreamStores(loc) {
       var latPointB = response.businesses[i].coordinates.latitude;
       var lonPointB = response.businesses[i].coordinates.longitude;
       var destinationPos = latPointB + "," + lonPointB;
-    //   console.log("Destination: ", destinationPos);
+      //   console.log("Destination: ", destinationPos);
       routeArray.push(destinationPos);
     }
-    
 
     var mapQuestKey = "bDYO5JVsT0lGPolecMUk1lCGVNostBHT";
 
     for (var i = 0; i < routeArray.length; i++) {
-    //   console.log(routeArray[i]);
+      //   console.log(routeArray[i]);
       var pointB = routeArray[i];
 
       // var pointB = destinationPos;
@@ -134,5 +144,5 @@ function getIceCreamStores(loc) {
     }
   });
 }
-console.log(routeArray);
+// console.log(routeArray);
 console.log(timeArray);
