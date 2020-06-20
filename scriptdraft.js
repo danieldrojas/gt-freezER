@@ -1,6 +1,7 @@
 var userLocation;
-var imgArray = [];
-var image;
+var timeArray = [];
+var routeArray = [];
+
 $(document).ready(function () {
   userLocation = navigator.geolocation.getCurrentPosition(
     locationHandler,
@@ -13,7 +14,7 @@ $(document).ready(function () {
   });
   return userLocation;
 });
-// console.log(userLocation);
+
 // pulled following location data from
 // https://developer.mozilla.org/en-US/docs/Web/API/Geolocation/getCurrentPosition
 
@@ -25,9 +26,7 @@ var options = {
 
 function locationHandler(pos) {
   var crd = pos.coords;
-  // console.log(crd);
-  // console.log(crd.latitude);
-  // console.log(crd.longitude);
+
   getIceCreamStores(crd);
 
   console.log("Your current position is:");
@@ -52,7 +51,6 @@ function getIceCreamStores(loc) {
       return;
     }
   }
-  // console.log(loc);
   var latPointA = loc.latitude;
   var lonPointA = loc.longitude;
   var URL =
@@ -73,47 +71,51 @@ function getIceCreamStores(loc) {
       console.log(error);
     },
   }).then(function (response) {
-    console.log(response);
+    // console.log(response);
     $("#iceCreamStores").empty();
+
+    var storeOne = response.businesses[0].name;
+    var storeTwo = response.businesses[1].name;
+    var storeThree = response.businesses[2].name;
+    var storeFour = response.businesses[3].name;
+    var storeFive = response.businesses[4].name;
+    var storeSix = response.businesses[5].name;
+    var storeSeven = response.businesses[6].name;
+    var storeEight = response.businesses[7].name;
+    var storeNine = response.businesses[8].name;
+    var storeTen = response.businesses[9].name;
+
     for (var i = 0; i < 10; i++) {
       var iceCreamStores = response.businesses[i].name;
-      var storeAddress = response.businesses[i].location.address1;
-      // console.log(storeAddress);
-      // console.log(iceCreamStores);
-      var iceCreamDistance = "distance";
-      var timeToDistance = "time";
       var storeList = $("<button>").text(iceCreamStores);
       $(storeList).attr("class", "btn-block newIceCreamStoreButton");
-
-      // adding new id to each button
       storeList.attr("id", iceCreamStores);
-
-      storeList.append($("<div>" + storeAddress + "</div>"));
-      storeList.append($("<div>" + iceCreamDistance + "</div>"));
-      storeList.append($("<div>" + timeToDistance + "</div>"));
-
       var listItem = $("<li>").append(storeList);
       $("#iceCreamStores").append(listItem);
+    }
+
+    //   var storeAddress = response.businesses[i].location.address1;
+
+    // adding new id to each button
+    var startingPos = latPointA + "," + lonPointA;
+    var pointA = startingPos;
+
+    for (var i = 0; i < 10; i++) {
       var latPointB = response.businesses[i].coordinates.latitude;
       var lonPointB = response.businesses[i].coordinates.longitude;
-      var startingPos = latPointA + "," + lonPointA;
       var destinationPos = latPointB + "," + lonPointB;
-      console.log("Starting: ", startingPos);
       console.log("Destination: ", destinationPos);
-      var mapQuestKey = "bDYO5JVsT0lGPolecMUk1lCGVNostBHT";
-      var pointA = startingPos;
-      var pointB = destinationPos;
+      routeArray.push(destinationPos);
+    }
+    console.log(routeArray);
 
-      //change
-      //this add the image to the main col. In the event of click on the button
-      var image = response.businesses[i].image_url;
-      console.log(image);
-      imgArray.push(image);
-      console.log(imgArray);
+    var mapQuestKey = "bDYO5JVsT0lGPolecMUk1lCGVNostBHT";
 
-      // var imgDiv = $("<img>");
-      // imgDiv.attr("src", image);
-      // $("#icecream-img").append(imgDiv);
+    for (var i = 0; i < routeArray.length; i++) {
+      console.log(routeArray[i]);
+      var pointB = routeArray[i];
+
+      // var pointB = destinationPos;
 
       var myURL =
         "https://www.mapquestapi.com/directions/v2/route?key=bDYO5JVsT0lGPolecMUk1lCGVNostBHT&from=" +
@@ -125,13 +127,10 @@ function getIceCreamStores(loc) {
         url: myURL,
         method: "GET",
       }).then(function (response) {
-        // console.log(response);
+        var travelTime = response.route.realTime;
+        console.log(travelTime);
+        //   timeArray.push(travelTime);
       });
     }
   });
-  $("#iceCreamStores").on("click", function (event) {
-    event.preventDefault();
-    console.log("You clicked the button!", iceCreamStores);
-  });
 }
-console.log(imgArray);
