@@ -1,3 +1,27 @@
+// var userLocation;
+// var imgArray = [];
+// var image;
+
+
+// var iceCreamStore = "name";
+// var storeAddress = "address";
+
+// var iceCreamDistance = 0;
+// var timeToDistance = 'string';
+
+// $(document).ready(function () {
+
+for (var i = 0; i < 10; i++) {
+
+  $("#iceCreamStores").append($("<div class='row'>" +  "<button>" + 'text goes here' + "</button>" + "</div>"))
+
+}
+    
+  
+
+console.log("we are here")
+
+
 var userLocation;
 var imgArray = [];
 var image;
@@ -131,8 +155,9 @@ function getIceCreamStores(loc) {
   });
   $("#iceCreamStores").on("click", function (event) {
     event.preventDefault();
-    console.log("You clicked the button!");
- 
+    console.log("You clicked the button!", iceCreamStores);
   });
 }
-   console.log(imgArray);
+console.log(imgArray);
+
+  
