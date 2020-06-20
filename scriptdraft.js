@@ -129,9 +129,9 @@ function getIceCreamStores(loc) {
 
       var myURL =
         "https://www.mapquestapi.com/directions/v2/route?key=bDYO5JVsT0lGPolecMUk1lCGVNostBHT&from=" +
-        pointA +
+        pointB +
         "&to=" +
-        pointB;
+        pointA;
 
       $.ajax({
         url: myURL,
