@@ -3,6 +3,14 @@ var timeArray = [];
 var routeArray = [];
 var imgArray = [];
 
+var routeTime = JSON.parse(localStorage.getItem("time"));
+
+function timeConvert(routeTime) {
+    var minutes = Math.floor(routeTime / 60);
+    var seconds = routeTime % 60;
+    console.log(minutes + ":" + seconds);
+  }
+
 $(document).ready(function () {
   userLocation = navigator.geolocation.getCurrentPosition(
     locationHandler,
@@ -69,42 +77,26 @@ function getIceCreamStores(loc) {
       // console.log(result);
     },
     error: function (error) {
-      console.log(error);
+    //   console.log(error);
     },
   }).then(function (response) {
-    console.log(response);
+    // console.log(response);
     $("#iceCreamStores").empty();
 
-    // var storeOne = response.businesses[0].name;
-    // var storeTwo = response.businesses[1].name;
-    // var storeThree = response.businesses[2].name;
-    // var storeFour = response.businesses[3].name;
-    // var storeFive = response.businesses[4].name;
-    // var storeSix = response.businesses[5].name;
-    // var storeSeven = response.businesses[6].name;
-    // var storeEight = response.businesses[7].name;
-    // var storeNine = response.businesses[8].name;
-    // var storeTen = response.businesses[9].name;
-
-    // console.log(storeOne);
-    // console.log(storeTwo);
-    // console.log(storeThree);
-    // console.log(storeFour);
-    // console.log(storeFive);
-    // console.log(storeSix);
-    // console.log(storeSeven);
-    // console.log(storeEight);
-    // console.log(storeNine);
-    // console.log(storeTen);
 
     for (var i = 0; i < 10; i++) {
       var iceCreamStores = response.businesses[i].name;
+      var storeAddress = response.businesses[i].location.address1;
       var storeList = $("<button>").text(iceCreamStores);
       $(storeList).attr("class", "btn-block newIceCreamStoreButton");
       storeList.attr("id", "button" + (1 + i));
       var listItem = $("<li>").append(storeList);
       $("#iceCreamStores").append(listItem);
+      storeList.append($("<div>" + storeAddress + "</div>"));
+
+
     }
+    
 
     for (var i = 0; i < 10; i++) {
       var imageURL = response.businesses[i].image_url;
@@ -124,7 +116,7 @@ function getIceCreamStores(loc) {
       routeArray.push(destinationPos);
     }
 
-    var mapQuestKey = "bDYO5JVsT0lGPolecMUk1lCGVNostBHT";
+    var mapQuestKey = "ZZRRtGp9bjs0OUWpRQ8pC3Tgt1zc8QAR";
 
     for (var i = 0; i < routeArray.length; i++) {
       //   console.log(routeArray[i]);
@@ -133,7 +125,9 @@ function getIceCreamStores(loc) {
       // var pointB = destinationPos;
 
       var myURL =
-        "https://www.mapquestapi.com/directions/v2/route?key=bDYO5JVsT0lGPolecMUk1lCGVNostBHT&from=" +
+        "https://www.mapquestapi.com/directions/v2/route?key=" +
+        mapQuestKey +
+        "&from=" +
         pointB +
         "&to=" +
         pointA;
@@ -145,9 +139,16 @@ function getIceCreamStores(loc) {
         var travelTime = response.route.realTime;
         // console.log(travelTime);
         timeArray.push(travelTime);
+        localStorage.setItem("time", JSON.stringify(timeArray));
       });
     }
+
     var imgDiv = $("<img>");
+    
+
+
+
+
 
     $("#button1").on("click", function (event) {
       event.preventDefault();
@@ -155,6 +156,7 @@ function getIceCreamStores(loc) {
       console.log("You clicked button 1!");
       imgDiv.attr("src", imgArray[0]);
       $("#icecream-img").append(imgDiv);
+      console.log(timeConvert(routeTime[0]));
     });
 
     $("#button2").on("click", function (event) {
@@ -162,6 +164,7 @@ function getIceCreamStores(loc) {
       console.log("You clicked button 2!");
       imgDiv.attr("src", imgArray[1]);
       $("#icecream-img").append(imgDiv);
+      console.log(timeConvert(routeTime[1]));
     });
 
     $("#button3").on("click", function (event) {
@@ -169,6 +172,7 @@ function getIceCreamStores(loc) {
       console.log("You clicked button 3!");
       imgDiv.attr("src", imgArray[2]);
       $("#icecream-img").append(imgDiv);
+      console.log(timeConvert(routeTime[2]));
     });
 
     $("#button4").on("click", function (event) {
@@ -176,6 +180,7 @@ function getIceCreamStores(loc) {
       console.log("You clicked button 4!");
       imgDiv.attr("src", imgArray[3]);
       $("#icecream-img").append(imgDiv);
+      console.log(timeConvert(routeTime[3]));
     });
 
     $("#button5").on("click", function (event) {
@@ -183,6 +188,7 @@ function getIceCreamStores(loc) {
       console.log("You clicked button 5!");
       imgDiv.attr("src", imgArray[4]);
       $("#icecream-img").append(imgDiv);
+      console.log(timeConvert(routeTime[4]));
     });
 
     $("#button6").on("click", function (event) {
@@ -190,6 +196,7 @@ function getIceCreamStores(loc) {
       console.log("You clicked button 6!");
       imgDiv.attr("src", imgArray[5]);
       $("#icecream-img").append(imgDiv);
+      console.log(timeConvert(routeTime[5]));
     });
 
     $("#button7").on("click", function (event) {
@@ -197,6 +204,7 @@ function getIceCreamStores(loc) {
       console.log("You clicked button 7!");
       imgDiv.attr("src", imgArray[6]);
       $("#icecream-img").append(imgDiv);
+      console.log(timeConvert(routeTime[6]));
     });
 
     $("#button8").on("click", function (event) {
@@ -204,25 +212,27 @@ function getIceCreamStores(loc) {
       console.log("You clicked button 8!");
       imgDiv.attr("src", imgArray[7]);
       $("#icecream-img").append(imgDiv);
+      console.log(timeConvert(routeTime[7]));
     });
 
     $("#button9").on("click", function (event) {
-        event.preventDefault();
-        console.log("You clicked button 9!");
-        imgDiv.attr("src", imgArray[8]);
-        $("#icecream-img").append(imgDiv);
-      });
+      event.preventDefault();
+      console.log("You clicked button 9!");
+      imgDiv.attr("src", imgArray[8]);
+      $("#icecream-img").append(imgDiv);
+      console.log(timeConvert(routeTime[8]));
+    });
 
-      $("#button10").on("click", function (event) {
-        event.preventDefault();
-        console.log("You clicked button 10!");
-        imgDiv.attr("src", imgArray[9]);
-        $("#icecream-img").append(imgDiv);
-      });
+    $("#button10").on("click", function (event) {
+      event.preventDefault();
+      console.log("You clicked button 10!");
+      imgDiv.attr("src", imgArray[9]);
+      $("#icecream-img").append(imgDiv);
+      console.log(timeConvert(routeTime[9]));
+    });
   });
 }
+
 // console.log(routeArray);
-console.log(timeArray);
-console.log(imgArray);
-
-
+// console.log(imgArray);
+//  console.log(timeArray);
