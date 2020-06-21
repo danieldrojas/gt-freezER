@@ -101,11 +101,16 @@ function getIceCreamStores(loc) {
 //change
       //this add the image to the main col. In the event of click on the button
       var image = response.businesses[i].image_url
-      console.log(image)
-
+      // console.log(image)
+      imageArray=[];
+      imageArray.push(image);
+      console.log(imageArray);
       var imgDiv = $("<img>")
+      
       imgDiv.attr('src', image)
       $("#icecream-img").append(imgDiv)
+      
+      // button # = Array index
 
 
 
