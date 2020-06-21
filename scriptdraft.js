@@ -4,6 +4,14 @@ var routeArray = [];
 var imgArray = [];
 var destinationArray = [];
 
+var routeTime = JSON.parse(localStorage.getItem("time"));
+
+function timeConvert(routeTime) {
+    var minutes = Math.floor(routeTime / 60);
+    var seconds = routeTime % 60;
+    console.log(minutes + ":" + seconds);
+  }
+
 $(document).ready(function () {
   userLocation = navigator.geolocation.getCurrentPosition(
     locationHandler,
@@ -70,7 +78,7 @@ function getIceCreamStores(loc) {
       // console.log(result);
     },
     error: function (error) {
-      console.log(error);
+    //   console.log(error);
     },
   }).then(function (response) {
     // console.log(response);
@@ -79,11 +87,15 @@ function getIceCreamStores(loc) {
 
     for (var i = 0; i < 10; i++) {
       var iceCreamStores = response.businesses[i].name;
+      var storeAddress = response.businesses[i].location.address1;
       var storeList = $("<button>").text(iceCreamStores);
       $(storeList).attr("class", "btn-block newIceCreamStoreButton");
       storeList.attr("id", "button" + (1 + i));
       var listItem = $("<li>").append(storeList);
       $("#iceCreamStores").append(listItem);
+      storeList.append($("<div>" + storeAddress + "</div>"));
+
+
     }
     // This function is used to fill in all the steps in the right column
     /*     function renderSelectedDest() {
@@ -95,6 +107,7 @@ function getIceCreamStores(loc) {
       }
     }
  */
+    
 
     for (var i = 0; i < 10; i++) {
       var imageURL = response.businesses[i].image_url;
