@@ -9,3 +9,11 @@ header {
 .newIceCreamStoreButton {
     padding: 20px;
 }
+
+img  {
+    height: auto;
+    width: 500px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
