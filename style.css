@@ -49,6 +49,7 @@ body {
   margin-right: auto;
   margin-bottom: 10px;
   color: whitesmoke;
+  text-align: center;
 }
 img {
   height: auto;
@@ -74,7 +75,6 @@ img {
 
 #button4 {
   background-color: #accc40;
-  color: whitesmoke;
 }
 
 #button5 {
@@ -95,7 +95,6 @@ img {
 }
 #button9 {
   background-color: #accc40;
-  color: whitesmoke;
 }
 #button10 {
   background-color: #efd19b;

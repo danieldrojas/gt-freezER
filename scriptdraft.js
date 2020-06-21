@@ -141,8 +141,6 @@ function getIceCreamStores(loc) {
         var travelTime = response.route.realTime;
         // console.log(response.route.legs[0].maneuvers[0].narrative);
         // console.log(response.route.legs[0].maneuvers[1].narrative);
-        var destDirOne = response.route.legs[0].maneuvers[0].narrative
-        destinationArray.push(destDirOne);
         timeArray.push(travelTime);
         // renderSelectedDest();
       });
@@ -184,7 +182,7 @@ function getIceCreamStores(loc) {
       imgDiv.attr("src", imgArray[0]);
       userDestination.text(response.businesses[0].name);
       appendDivs();
-      renderSelectedDest();
+      // renderSelectedDest();
     });
 
     $("#button2").on("click", function (event) {
@@ -273,4 +271,3 @@ function getIceCreamStores(loc) {
 // console.log(timeArray);
 // console.log(timeArray);
 // console.log(imgArray);
-console.log(destinationArray);
