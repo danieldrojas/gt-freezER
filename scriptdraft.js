@@ -2,14 +2,15 @@ var userLocation;
 var timeArray = [];
 var routeArray = [];
 var imgArray = [];
+var urlArray = [];
 
 var routeTime = JSON.parse(localStorage.getItem("time"));
 
 function timeConvert(routeTime) {
-    var minutes = Math.floor(routeTime / 60);
-    var seconds = routeTime % 60;
-    console.log(minutes + ":" + seconds);
-  }
+  var minutes = Math.floor(routeTime / 60);
+  var seconds = routeTime % 60;
+  console.log(minutes + ":" + seconds);
+}
 
 $(document).ready(function () {
   userLocation = navigator.geolocation.getCurrentPosition(
@@ -77,12 +78,11 @@ function getIceCreamStores(loc) {
       // console.log(result);
     },
     error: function (error) {
-    //   console.log(error);
+      //   console.log(error);
     },
   }).then(function (response) {
-    // console.log(response);
+    console.log(response);
     $("#iceCreamStores").empty();
-
 
     for (var i = 0; i < 10; i++) {
       var iceCreamStores = response.businesses[i].name;
@@ -93,16 +93,17 @@ function getIceCreamStores(loc) {
       var listItem = $("<li>").append(storeList);
       $("#iceCreamStores").append(listItem);
       storeList.append($("<div>" + storeAddress + "</div>"));
-
-
     }
-    
+
+    for (var i = 0; i < 10; i++) {
+      var storeURL = response.businesses[i].url;
+      urlArray.push(storeURL);
+    }
 
     for (var i = 0; i < 10; i++) {
       var imageURL = response.businesses[i].image_url;
       imgArray.push(imageURL);
     }
-    //   var storeAddress = response.businesses[i].location.address1;
 
     // adding new id to each button
     var startingPos = latPointA + "," + lonPointA;
@@ -144,91 +145,139 @@ function getIceCreamStores(loc) {
     }
 
     var imgDiv = $("<img>");
-    
 
-
-
-
+    // var storeLink = $("<button>");
+    // $(storeLink).attr("class", "btn-block storeLinkButton");
+    // $("#storeURLButton").append(storeLink);
 
     $("#button1").on("click", function (event) {
       event.preventDefault();
-      $("#icecream-img").empty();
+      $("#storeURLButton").empty();
       console.log("You clicked button 1!");
       imgDiv.attr("src", imgArray[0]);
       $("#icecream-img").append(imgDiv);
       console.log(timeConvert(routeTime[0]));
+      var storeLink = $("<button>");
+      $(storeLink).attr("class", "btn-block storeLinkButton");
+      $("#storeURLButton").append(storeLink);
+      storeLink.append($("<a href='" + urlArray[0]+ "' target='_blank'> Click here for our store hours, menu & more!</a>"));
     });
 
     $("#button2").on("click", function (event) {
       event.preventDefault();
+      $("#storeURLButton").empty();
       console.log("You clicked button 2!");
       imgDiv.attr("src", imgArray[1]);
       $("#icecream-img").append(imgDiv);
       console.log(timeConvert(routeTime[1]));
+      var storeLink = $("<button>");
+      $(storeLink).attr("class", "btn-block storeLinkButton");
+      $("#storeURLButton").append(storeLink);
+      storeLink.append($("<a href='" + urlArray[1]+ "' target='_blank'> Click here for our store hours, menu & more!</a>"));
     });
 
     $("#button3").on("click", function (event) {
       event.preventDefault();
+      $("#storeURLButton").empty();
       console.log("You clicked button 3!");
       imgDiv.attr("src", imgArray[2]);
       $("#icecream-img").append(imgDiv);
       console.log(timeConvert(routeTime[2]));
+      var storeLink = $("<button>");
+      $(storeLink).attr("class", "btn-block storeLinkButton");
+      $("#storeURLButton").append(storeLink);
+      storeLink.append($("<a href='" + urlArray[2]+ "' target='_blank'> Click here for our store hours, menu & more!</a>"));
     });
 
     $("#button4").on("click", function (event) {
       event.preventDefault();
+      $("#storeURLButton").empty();
       console.log("You clicked button 4!");
       imgDiv.attr("src", imgArray[3]);
       $("#icecream-img").append(imgDiv);
       console.log(timeConvert(routeTime[3]));
+      var storeLink = $("<button>");
+      $(storeLink).attr("class", "btn-block storeLinkButton");
+      $("#storeURLButton").append(storeLink);
+      storeLink.append($("<a href='" + urlArray[3]+ "' target='_blank'> Click here for our store hours, menu & more!</a>"));
     });
 
     $("#button5").on("click", function (event) {
       event.preventDefault();
+      $("#storeURLButton").empty();
       console.log("You clicked button 5!");
       imgDiv.attr("src", imgArray[4]);
       $("#icecream-img").append(imgDiv);
       console.log(timeConvert(routeTime[4]));
+      var storeLink = $("<button>");
+      $(storeLink).attr("class", "btn-block storeLinkButton");
+      $("#storeURLButton").append(storeLink);
+      storeLink.append($("<a href='" + urlArray[4]+ "' target='_blank'> Click here for our store hours, menu & more!</a>"));
     });
 
     $("#button6").on("click", function (event) {
       event.preventDefault();
+      $("#storeURLButton").empty();
       console.log("You clicked button 6!");
       imgDiv.attr("src", imgArray[5]);
       $("#icecream-img").append(imgDiv);
       console.log(timeConvert(routeTime[5]));
+      var storeLink = $("<button>");
+      $(storeLink).attr("class", "btn-block storeLinkButton");
+      $("#storeURLButton").append(storeLink);
+      storeLink.append($("<a href='" + urlArray[5]+ "' target='_blank'> Click here for our store hours, menu & more!</a>"));
     });
 
     $("#button7").on("click", function (event) {
       event.preventDefault();
+      $("#storeURLButton").empty();
       console.log("You clicked button 7!");
       imgDiv.attr("src", imgArray[6]);
       $("#icecream-img").append(imgDiv);
       console.log(timeConvert(routeTime[6]));
+      var storeLink = $("<button>");
+      $(storeLink).attr("class", "btn-block storeLinkButton");
+      $("#storeURLButton").append(storeLink);
+      storeLink.append($("<a href='" + urlArray[6]+ "' target='_blank'> Click here for our store hours, menu & more!</a>"));
     });
 
     $("#button8").on("click", function (event) {
       event.preventDefault();
+      $("#storeURLButton").empty();
       console.log("You clicked button 8!");
       imgDiv.attr("src", imgArray[7]);
       $("#icecream-img").append(imgDiv);
       console.log(timeConvert(routeTime[7]));
+      var storeLink = $("<button>");
+      $(storeLink).attr("class", "btn-block storeLinkButton");
+      $("#storeURLButton").append(storeLink);
+      storeLink.append($("<a href='" + urlArray[7]+ "' target='_blank'> Click here for our store hours, menu & more!</a>"));
     });
 
     $("#button9").on("click", function (event) {
       event.preventDefault();
+      $("#storeURLButton").empty();
       console.log("You clicked button 9!");
       imgDiv.attr("src", imgArray[8]);
       $("#icecream-img").append(imgDiv);
       console.log(timeConvert(routeTime[8]));
+      var storeLink = $("<button>");
+      $(storeLink).attr("class", "btn-block storeLinkButton");
+      $("#storeURLButton").append(storeLink);
+      storeLink.append($("<a href='" + urlArray[8]+ "' target='_blank'> Click here for our store hours, menu & more!</a>"));
     });
 
     $("#button10").on("click", function (event) {
       event.preventDefault();
+      $("#storeURLButton").empty();
       console.log("You clicked button 10!");
       imgDiv.attr("src", imgArray[9]);
       $("#icecream-img").append(imgDiv);
       console.log(timeConvert(routeTime[9]));
+      var storeLink = $("<button>");
+      $(storeLink).attr("class", "btn-block storeLinkButton");
+      $("#storeURLButton").append(storeLink);
+      storeLink.append($("<a href='" + urlArray[9]+ "' target='_blank'> Click here for our store hours, menu & more!</a>"));
     });
   });
 }
@@ -236,3 +285,4 @@ function getIceCreamStores(loc) {
 // console.log(routeArray);
 // console.log(imgArray);
 //  console.log(timeArray);
+console.log(urlArray);
