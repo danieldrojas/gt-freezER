@@ -164,7 +164,13 @@ function getIceCreamStores(loc) {
       var storeLink = $("<button>");
       $(storeLink).attr("class", "btn-block storeLinkButton");
       $("#storeURLButton").append(storeLink);
-      storeLink.append($("<a href='" + urlArray[0]+ "' target='_blank'> Click here for our store hours, menu & more!</a>"));
+      storeLink.append(
+        $(
+          "<a href='" +
+            urlArray[0] +
+            "' target='_blank'> Click here for our store hours, menu & more!</a>"
+        )
+      );
     });
 
     $("#button2").on("click", function (event) {
@@ -179,7 +185,13 @@ function getIceCreamStores(loc) {
       var storeLink = $("<button>");
       $(storeLink).attr("class", "btn-block storeLinkButton");
       $("#storeURLButton").append(storeLink);
-      storeLink.append($("<a href='" + urlArray[1]+ "' target='_blank'> Click here for our store hours, menu & more!</a>"));
+      storeLink.append(
+        $(
+          "<a href='" +
+            urlArray[1] +
+            "' target='_blank'> Click here for our store hours, menu & more!</a>"
+        )
+      );
     });
 
     $("#button3").on("click", function (event) {
@@ -194,7 +206,13 @@ function getIceCreamStores(loc) {
       var storeLink = $("<button>");
       $(storeLink).attr("class", "btn-block storeLinkButton");
       $("#storeURLButton").append(storeLink);
-      storeLink.append($("<a href='" + urlArray[2]+ "' target='_blank'> Click here for our store hours, menu & more!</a>"));
+      storeLink.append(
+        $(
+          "<a href='" +
+            urlArray[2] +
+            "' target='_blank'> Click here for our store hours, menu & more!</a>"
+        )
+      );
     });
 
     $("#button4").on("click", function (event) {
@@ -209,7 +227,13 @@ function getIceCreamStores(loc) {
       var storeLink = $("<button>");
       $(storeLink).attr("class", "btn-block storeLinkButton");
       $("#storeURLButton").append(storeLink);
-      storeLink.append($("<a href='" + urlArray[3]+ "' target='_blank'> Click here for our store hours, menu & more!</a>"));
+      storeLink.append(
+        $(
+          "<a href='" +
+            urlArray[3] +
+            "' target='_blank'> Click here for our store hours, menu & more!</a>"
+        )
+      );
     });
 
     $("#button5").on("click", function (event) {
@@ -224,7 +248,13 @@ function getIceCreamStores(loc) {
       var storeLink = $("<button>");
       $(storeLink).attr("class", "btn-block storeLinkButton");
       $("#storeURLButton").append(storeLink);
-      storeLink.append($("<a href='" + urlArray[4]+ "' target='_blank'> Click here for our store hours, menu & more!</a>"));
+      storeLink.append(
+        $(
+          "<a href='" +
+            urlArray[4] +
+            "' target='_blank'> Click here for our store hours, menu & more!</a>"
+        )
+      );
     });
 
     $("#button6").on("click", function (event) {
@@ -239,7 +269,13 @@ function getIceCreamStores(loc) {
       var storeLink = $("<button>");
       $(storeLink).attr("class", "btn-block storeLinkButton");
       $("#storeURLButton").append(storeLink);
-      storeLink.append($("<a href='" + urlArray[5]+ "' target='_blank'> Click here for our store hours, menu & more!</a>"));
+      storeLink.append(
+        $(
+          "<a href='" +
+            urlArray[5] +
+            "' target='_blank'> Click here for our store hours, menu & more!</a>"
+        )
+      );
     });
 
     $("#button7").on("click", function (event) {
@@ -254,7 +290,13 @@ function getIceCreamStores(loc) {
       var storeLink = $("<button>");
       $(storeLink).attr("class", "btn-block storeLinkButton");
       $("#storeURLButton").append(storeLink);
-      storeLink.append($("<a href='" + urlArray[6]+ "' target='_blank'> Click here for our store hours, menu & more!</a>"));
+      storeLink.append(
+        $(
+          "<a href='" +
+            urlArray[6] +
+            "' target='_blank'> Click here for our store hours, menu & more!</a>"
+        )
+      );
     });
 
     $("#button8").on("click", function (event) {
@@ -269,7 +311,13 @@ function getIceCreamStores(loc) {
       var storeLink = $("<button>");
       $(storeLink).attr("class", "btn-block storeLinkButton");
       $("#storeURLButton").append(storeLink);
-      storeLink.append($("<a href='" + urlArray[7]+ "' target='_blank'> Click here for our store hours, menu & more!</a>"));
+      storeLink.append(
+        $(
+          "<a href='" +
+            urlArray[7] +
+            "' target='_blank'> Click here for our store hours, menu & more!</a>"
+        )
+      );
     });
 
     $("#button9").on("click", function (event) {
@@ -284,7 +332,13 @@ function getIceCreamStores(loc) {
       var storeLink = $("<button>");
       $(storeLink).attr("class", "btn-block storeLinkButton");
       $("#storeURLButton").append(storeLink);
-      storeLink.append($("<a href='" + urlArray[8]+ "' target='_blank'> Click here for our store hours, menu & more!</a>"));
+      storeLink.append(
+        $(
+          "<a href='" +
+            urlArray[8] +
+            "' target='_blank'> Click here for our store hours, menu & more!</a>"
+        )
+      );
     });
 
     $("#button10").on("click", function (event) {
@@ -299,7 +353,13 @@ function getIceCreamStores(loc) {
       var storeLink = $("<button>");
       $(storeLink).attr("class", "btn-block storeLinkButton");
       $("#storeURLButton").append(storeLink);
-      storeLink.append($("<a href='" + urlArray[9]+ "' target='_blank'> Click here for our store hours, menu & more!</a>"));
+      storeLink.append(
+        $(
+          "<a href='" +
+            urlArray[9] +
+            "' target='_blank'> Click here for our store hours, menu & more!</a>"
+        )
+      );
     });
   });
 }
