@@ -233,6 +233,24 @@ function getIceCreamStores(loc) {
   });
 }
 
+var timerStart = "5:05";
+var timerInterval = setInterval(function() {
+
+
+  var timer = timerStart.split(':');
+  var minutes = parseInt(timer[0], 10);
+  var seconds = parseInt(timer[1], 10);
+  --seconds;
+  minutes = (seconds < 0) ? --minutes : minutes;
+  if (minutes < 0) clearInterval(timerInterval);
+  seconds = (seconds < 0) ? 59 : seconds;
+  seconds = (seconds < 10) ? '0' + seconds : seconds;
+  $("#countdown").text(minutes + ':' + seconds);
+  timerStart = minutes + ':' + seconds;
+  console.log(timerStart)
+}, 1000);
+
+
 // console.log(routeArray);
 // console.log(imgArray);
 //  console.log(timeArray);
