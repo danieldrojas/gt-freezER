@@ -3,6 +3,7 @@ var timeArray = [];
 var routeArray = [];
 var imgArray = [];
 var urlArray = [];
+var storeNameArray = [];
 
 var routeTime = JSON.parse(localStorage.getItem("time"));
 
@@ -86,6 +87,7 @@ function getIceCreamStores(loc) {
 
     for (var i = 0; i < 10; i++) {
       var iceCreamStores = response.businesses[i].name;
+      storeNameArray.push(iceCreamStores);
       var storeAddress = response.businesses[i].location.address1;
       var storeList = $("<button>").text(iceCreamStores);
       $(storeList).attr("class", "btn-block newIceCreamStoreButton");
@@ -157,6 +159,7 @@ function getIceCreamStores(loc) {
       imgDiv.attr("src", imgArray[0]);
       $("#icecream-img").append(imgDiv);
       console.log(timeConvert(routeTime[0]));
+      $("#storeHeader").text(storeNameArray[0]);
       var storeLink = $("<button>");
       $(storeLink).attr("class", "btn-block storeLinkButton");
       $("#storeURLButton").append(storeLink);
@@ -170,6 +173,7 @@ function getIceCreamStores(loc) {
       imgDiv.attr("src", imgArray[1]);
       $("#icecream-img").append(imgDiv);
       console.log(timeConvert(routeTime[1]));
+      $("#storeHeader").text(storeNameArray[1]);
       var storeLink = $("<button>");
       $(storeLink).attr("class", "btn-block storeLinkButton");
       $("#storeURLButton").append(storeLink);
@@ -183,6 +187,7 @@ function getIceCreamStores(loc) {
       imgDiv.attr("src", imgArray[2]);
       $("#icecream-img").append(imgDiv);
       console.log(timeConvert(routeTime[2]));
+      $("#storeHeader").text(storeNameArray[2]);
       var storeLink = $("<button>");
       $(storeLink).attr("class", "btn-block storeLinkButton");
       $("#storeURLButton").append(storeLink);
@@ -196,6 +201,7 @@ function getIceCreamStores(loc) {
       imgDiv.attr("src", imgArray[3]);
       $("#icecream-img").append(imgDiv);
       console.log(timeConvert(routeTime[3]));
+      $("#storeHeader").text(storeNameArray[3]);
       var storeLink = $("<button>");
       $(storeLink).attr("class", "btn-block storeLinkButton");
       $("#storeURLButton").append(storeLink);
@@ -209,6 +215,7 @@ function getIceCreamStores(loc) {
       imgDiv.attr("src", imgArray[4]);
       $("#icecream-img").append(imgDiv);
       console.log(timeConvert(routeTime[4]));
+      $("#storeHeader").text(storeNameArray[4]);
       var storeLink = $("<button>");
       $(storeLink).attr("class", "btn-block storeLinkButton");
       $("#storeURLButton").append(storeLink);
@@ -222,6 +229,7 @@ function getIceCreamStores(loc) {
       imgDiv.attr("src", imgArray[5]);
       $("#icecream-img").append(imgDiv);
       console.log(timeConvert(routeTime[5]));
+      $("#storeHeader").text(storeNameArray[5]);
       var storeLink = $("<button>");
       $(storeLink).attr("class", "btn-block storeLinkButton");
       $("#storeURLButton").append(storeLink);
@@ -235,6 +243,7 @@ function getIceCreamStores(loc) {
       imgDiv.attr("src", imgArray[6]);
       $("#icecream-img").append(imgDiv);
       console.log(timeConvert(routeTime[6]));
+      $("#storeHeader").text(storeNameArray[6]);
       var storeLink = $("<button>");
       $(storeLink).attr("class", "btn-block storeLinkButton");
       $("#storeURLButton").append(storeLink);
@@ -248,6 +257,7 @@ function getIceCreamStores(loc) {
       imgDiv.attr("src", imgArray[7]);
       $("#icecream-img").append(imgDiv);
       console.log(timeConvert(routeTime[7]));
+      $("#storeHeader").text(storeNameArray[7]);
       var storeLink = $("<button>");
       $(storeLink).attr("class", "btn-block storeLinkButton");
       $("#storeURLButton").append(storeLink);
@@ -261,6 +271,7 @@ function getIceCreamStores(loc) {
       imgDiv.attr("src", imgArray[8]);
       $("#icecream-img").append(imgDiv);
       console.log(timeConvert(routeTime[8]));
+      $("#storeHeader").text(storeNameArray[8]);
       var storeLink = $("<button>");
       $(storeLink).attr("class", "btn-block storeLinkButton");
       $("#storeURLButton").append(storeLink);
@@ -274,6 +285,7 @@ function getIceCreamStores(loc) {
       imgDiv.attr("src", imgArray[9]);
       $("#icecream-img").append(imgDiv);
       console.log(timeConvert(routeTime[9]));
+      $("#storeHeader").text(storeNameArray[9]);
       var storeLink = $("<button>");
       $(storeLink).attr("class", "btn-block storeLinkButton");
       $("#storeURLButton").append(storeLink);
@@ -285,4 +297,5 @@ function getIceCreamStores(loc) {
 // console.log(routeArray);
 // console.log(imgArray);
 //  console.log(timeArray);
-console.log(urlArray);
+// console.log(urlArray);
+console.log(storeNameArray);
