@@ -1,11 +1,22 @@
 var userLocation;
 var timeArray = [];
 var routeArray = [];
+var imgArray = [];
+var destinationArray = [];
+var narrativeAllStores = []
+var routeTime = JSON.parse(localStorage.getItem("time"));
+var arrayOfArrays = []
 
+
+
+var narrativeStore1Array = []
+function timeConvert(routeTime) {
+    var minutes = Math.floor(routeTime / 60);
+    var seconds = routeTime % 60;
+    console.log(minutes + ":" + seconds);
+  }
 
 $(document).ready(function () {
-
-
   userLocation = navigator.geolocation.getCurrentPosition(
     locationHandler,
     locationErrorHandler,
@@ -71,33 +82,33 @@ function getIceCreamStores(loc) {
       // console.log(result);
     },
     error: function (error) {
-      console.log(error);
+    //   console.log(error);
     },
   }).then(function (response) {
     // console.log(response);
     $("#iceCreamStores").empty();
 
-    var storeOne = response.businesses[0].name;
-    var storeTwo = response.businesses[1].name;
-    var storeThree = response.businesses[2].name;
-    var storeFour = response.businesses[3].name;
-    var storeFive = response.businesses[4].name;
-    var storeSix = response.businesses[5].name;
-    var storeSeven = response.businesses[6].name;
-    var storeEight = response.businesses[7].name;
-    var storeNine = response.businesses[8].name;
-    var storeTen = response.businesses[9].name;
 
     for (var i = 0; i < 10; i++) {
       var iceCreamStores = response.businesses[i].name;
+      var storeAddress = response.businesses[i].location.address1;
       var storeList = $("<button>").text(iceCreamStores);
       $(storeList).attr("class", "btn-block newIceCreamStoreButton");
-      storeList.attr("id", iceCreamStores);
+      storeList.attr("id", "button" + (1 + i));
       var listItem = $("<li>").append(storeList);
       $("#iceCreamStores").append(listItem);
+      storeList.append($("<div>" + storeAddress + "</div>"));
+
+
     }
 
-    //   var storeAddress = response.businesses[i].location.address1;
+    
+
+    for (var i = 0; i < 10; i++) {
+      var imageURL = response.businesses[i].image_url;
+      imgArray.push(imageURL);
+    }
+    
 
     // adding new id to each button
     var startingPos = latPointA + "," + lonPointA;
@@ -111,50 +122,249 @@ function getIceCreamStores(loc) {
       routeArray.push(destinationPos);
     }
 
-
-    var mapQuestKey = "ZZRRtGp9bjs0OUWpRQ8pC3Tgt1zc8QAR";
-
     for (var i = 0; i < routeArray.length; i++) {
       //   console.log(routeArray[i]);
       var pointB = routeArray[i];
 
       // var pointB = destinationPos;
+      var mapQuestKey = "ZZRRtGp9bjs0OUWpRQ8pC3Tgt1zc8QAR";
 
       var myURL =
-        "https://www.mapquestapi.com/directions/v2/route?key=ZZRRtGp9bjs0OUWpRQ8pC3Tgt1zc8QAR&from=" +
-        pointA +
+        "https://www.mapquestapi.com/directions/v2/route?key=" +
+        mapQuestKey +
+        "&from=" +
+        pointB +
         "&to=" +
-        pointB;
+        pointA;
 
       $.ajax({
         url: myURL,
         method: "GET",
-      }).then(function (response) {
-        var travelTime = response.route.realTime;
-        // console.log(travelTime);
+      }).then(function (responseMap) {
+        var travelTime = responseMap.route.realTime;
+
+
+        arrayOfArrays.push(responseMap.route.legs[0].maneuvers)
+        
+        console.log(responseMap.route.legs[0].maneuvers)
+      
+        
+         
+
+        // console.log(narrativeStore1Array)
+
+          // console.log(responseMap.route.legs[0].maneuvers[i].narrative)
+
+        
+        // console.log(narrativeAllStores)
+        
+        // console.log(responseMap.route.legs[0].maneuvers)
+
+//to loop throu
+        
+      
+
+
+          // $("#routeNarrativeOl").append($("<li>" + narratives + "</li>"))
+  
+
+
+
+        // console.log(responseMap.route.legs);
+        // var narratives = responseMap.route.legs[0].maneuvers[0].narrative
+        // console.log(narratives)
+
+        // // console.log(response.route.legs[i].maneuvers[0].narrative);
+
+
+        // $("#routeNarrativeOl").append($("<li>" + narratives + "</li>"))
+
         timeArray.push(travelTime);
+        //make this a function
       });
     }
 
+        // Trying to dynamically create the button event listeners
+/*     
+    function buttonEventListeners() {
+      for (i = 0; i < 10; i++) {
+        $("button" + i).on("click", function (event) {
+          event.preventDefault();
+          clearDivs();
+          // console.log("You clicked button 1!");
+          imgDiv.attr("src", imgArray[i]);
+          userDestination.text(response.businesses[i].name);
+          $("#icecream-img").append(imgDiv);
+          $("#selectedDestination").append(userDestination);
+          renderSelectedDest();
+        });
+      }
+    } */
+
+    var imgDiv = $("<img>");
+    var userDestination = $("<h2>");
+
+    function clearDivs() {
+      $("#icecream-img").empty();
+      $("#selectedDestination").empty();
+    }
+
+    function appendDivs(){
+      $("#icecream-img").append(imgDiv);
+      $("#selectedDestination").append(userDestination);
+    }
+
+
+    function directionsButtons(storeNumber) {
+      $("#routeNarrativeOl").empty();
+
+      for (var i = 0; i < arrayOfArrays[storeNumber].length; i++) {
+        // if (arrayOfArrays[storeNumber][i].narrative === undefined) {
+          // i++
+        $("#routeNarrativeOl").append($("<li>" + arrayOfArrays[storeNumber][i].narrative + "</li>"))
+        
+        // }
+        // $("#routeNarrativeOl").append($("<li>" + arrayOfArrays[storeNumber][i+1].narrative + "</li>"))
+
+        console.log(arrayOfArrays[storeNumber][i].narrative)
+          
+
+      }
+
+    }
+
+
+    $("#button1").on("click", function (event) {
+      event.preventDefault();
+      clearDivs();
+      // console.log("You clicked button 1!");
+      imgDiv.attr("src", imgArray[0]);
+      userDestination.text(response.businesses[0].name);
+
+      appendDivs();
+      // renderSelectedDest(); 
+      console.log(arrayOfArrays)
+
+      // console.log(objDirections)
+      directionsButtons(0)
+    
+
+      
+      
+      
+//adds first step on step section
+
+      
+
+    });
+
+    $("#button2").on("click", function (event) {
+      event.preventDefault();
+      clearDivs();
+      //console.log("You clicked button 2!");
+      imgDiv.attr("src", imgArray[1]);
+      userDestination.text(response.businesses[1].name);
+      appendDivs();
+      $("#routeNarrativeOl").append($("<li>" + narrativeAllStores[1] + "</li>"))
+      directionsButtons(1)
+
+
+    });
+
+    $("#button3").on("click", function (event) {
+      event.preventDefault();
+      clearDivs();
+      //console.log("You clicked button 3!");
+      imgDiv.attr("src", imgArray[2]);
+      userDestination.text(response.businesses[2].name);
+      appendDivs();
+
+      directionsButtons(2)
+
+    });
+
+    $("#button4").on("click", function (event) {
+      event.preventDefault();
+      clearDivs();
+      // console.log("You clicked button 4!");
+      imgDiv.attr("src", imgArray[3]);
+      userDestination.text(response.businesses[3].name);    
+      appendDivs();
+      directionsButtons(3)
+
+      
+    });
+
+    $("#button5").on("click", function (event) {
+      event.preventDefault();
+      clearDivs();
+      // console.log("You clicked button 5!");
+      imgDiv.attr("src", imgArray[4]);
+      userDestination.text(response.businesses[4].name);
+      appendDivs();
+      directionsButtons(4)
+
+    });
+
+    $("#button6").on("click", function (event) {
+      event.preventDefault();
+      clearDivs();
+      // console.log("You clicked button 6!");
+      imgDiv.attr("src", imgArray[5]);
+      userDestination.text(response.businesses[5].name);
+      appendDivs();
+      directionsButtons(5)
+
+    });
+
+    $("#button7").on("click", function (event) {
+      event.preventDefault();
+      clearDivs();
+      // console.log("You clicked button 7!");
+      imgDiv.attr("src", imgArray[6]);
+      userDestination.text(response.businesses[5].name);
+      appendDivs();
+      directionsButtons(6)
+
+    });
+
+    $("#button8").on("click", function (event) {
+      event.preventDefault();
+      clearDivs();
+      // console.log("You clicked button 8!");
+      imgDiv.attr("src", imgArray[7]);
+      userDestination.text(response.businesses[2].name);
+      appendDivs();
+      directionsButtons(7)
+
+    });
+
+    $("#button9").on("click", function (event) {
+      event.preventDefault();
+      clearDivs();
+      // console.log("You clicked button 9!");
+      imgDiv.attr("src", imgArray[8]);
+      userDestination.text(response.businesses[8].name);
+      appendDivs();
+      directionsButtons(8)
+
+    });
+
+    $("#button10").on("click", function (event) {
+      event.preventDefault();
+      clearDivs();
+      // console.log("You clicked button 10!");
+      imgDiv.attr("src", imgArray[9]);
+      userDestination.text(response.businesses[9].name);
+      appendDivs();
+      directionsButtons(9)
+
+    });
+
+
   });
-
-  function timeConvert(routeTime) {
-
-    var minutes = Math.floor(routeTime / 60);
-    var seconds = routeTime % 60;
-    console.log(seconds)
-    console.log(minutes + ":" + seconds);
-  
-  }
-
- 
-  
-  console.log(timeConvert(450))
-
- 
-
-
-
-
-  
 }
+// console.log(routeArray);
+// console.log(timeArray);
+// console.log(timeArray);
+// console.log(imgArray);

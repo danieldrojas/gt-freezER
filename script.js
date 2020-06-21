@@ -26,8 +26,9 @@ var userLocation;
 var imgArray = [];
 var image;
 $(document).ready(function () {
+  //grabs user location
   userLocation = navigator.geolocation.getCurrentPosition(
-    locationHandler,
+    locationHandler, // creates variable crd by calling getIceCreamStores function
     locationErrorHandler,
     options
   );
@@ -61,7 +62,7 @@ function locationHandler(pos) {
 function locationErrorHandler(err) {
   console.warn(`ERROR(${err.code}): ${err.message}`);
 }
-
+// this function retrieves the stores by searching for the term ice cream
 function getIceCreamStores(loc) {
   var data = { term: "ice cream" };
   if (loc && loc.latitude) {
@@ -76,13 +77,14 @@ function getIceCreamStores(loc) {
       return;
     }
   }
-  // console.log(loc);
+  // setting up variables for the yelp api AJAX call
   var latPointA = loc.latitude;
   var lonPointA = loc.longitude;
   var URL =
     "https://cors-anywhere.herokuapp.com/https://api.yelp.com/v3/businesses/search?";
   var APIkey =
     "pZoeLz1SZU0FpO7ZzMtXIQ9dSW1UZ3Wp762C53LAb3zgJeMNvtwIQUCJL2-8hAAquHFK2XIiamEuOUXbuw5Rre3ie_pe1vknYXD9bCDCmd53ztY7KsdjUuIxlVvqXnYx";
+  // yelp ajax call
   $.ajax({
     url: URL,
     method: "GET",
@@ -94,11 +96,22 @@ function getIceCreamStores(loc) {
       // console.log(result);
     },
     error: function (error) {
-      console.log(error);
+      // console.log(error);
     },
   }).then(function (response) {
     console.log(response);
-    $("#iceCreamStores").empty();
+    // after receiving the data from yelp
+    $("#iceCreamStores").empty(); // empties the iceCreamStores div
+    //this add the image to the main col. In the event of click on the button
+    function addImage() {
+      var image = response.businesses[i].image_url;
+      console.log(image);
+
+      var imgDiv = $("<img>");
+      imgDiv.attr("src", image);
+      $("#icecream-img").append(imgDiv);
+    }
+    // runs 10 times and each time assigns the response to a variable
     for (var i = 0; i < 10; i++) {
       var iceCreamStores = response.businesses[i].name;
       var storeAddress = response.businesses[i].location.address1;
@@ -115,7 +128,6 @@ function getIceCreamStores(loc) {
       storeList.append($("<div>" + storeAddress + "</div>"));
       storeList.append($("<div>" + iceCreamDistance + "</div>"));
       storeList.append($("<div>" + timeToDistance + "</div>"));
-
       var listItem = $("<li>").append(storeList);
       $("#iceCreamStores").append(listItem);
       var latPointB = response.businesses[i].coordinates.latitude;
@@ -127,6 +139,7 @@ function getIceCreamStores(loc) {
       var mapQuestKey = "bDYO5JVsT0lGPolecMUk1lCGVNostBHT";
       var pointA = startingPos;
       var pointB = destinationPos;
+      addImage(); //line 80
 
       //change
       //this add the image to the main col. In the event of click on the button
@@ -149,6 +162,7 @@ function getIceCreamStores(loc) {
         url: myURL,
         method: "GET",
       }).then(function (response) {
+        console.log(response);
         // console.log(response);
       });
     }

@@ -18,38 +18,51 @@
       <div class="col-sm-12">
         <h1>freezER</h1>
       </div>
-    </div>
-  </header>
-  <main>
-    <div class="row">
-      <div class="col-sm-4" class="search-area" id="left-col">
-        <div class="jumbotron">
-          <div class="input-group mb-3">
-            <input type="text" class="form-control"
-              placeholder="Search by Zip Code" aria-label="Zip Code"
-              aria-describedby="button-addon2" id="zipcode-input" />
-            <div class="input-group-append">
-              <button class="btn btn-outline-secondary row" type="button"
-                id="zipcode-submit">
-                Button
-              </button>
+    </header>
+    <main>
+      <div class="row">
+        <div class="col-sm-4" class="search-area" id="left-col">
+          <div class="jumbotron">
+            <div class="input-group mb-3">
+              <input
+                type="text"
+                class="form-control col-10"
+                placeholder="Search by Zip Code"
+                aria-label="Zip Code"
+                aria-describedby="button-addon2"
+                id="zipcode-input"
+              />
+              <div class="input-group-append col-2">
+                <button
+                  class="btn btn-outline-secondary row"
+                  type="button"
+                  id="zipcode-submit"
+                >
+                  Button
+                </button>
+              </div>
+            </div>
+            <div class="ul" id="iceCreamStores">
             </div>
           </div>
-          <div class="ul" id="iceCreamStores">
-            <!-- <button> this is a button </button> -->
+        </div>
+        <div class="col-sm-4" class="timer-area" id="middle-col">
+          <div class="jumbotron">
+            <div  class="row" id="selectedDestination">
+              <p><h3>Selected Destination</h3></p>
+            </div>
+            <div class="row">
+              <p><h3>Timer</h3></p>
+            </div>
+            <div id="icecream-img" class="row">
+              <
+            </div>
           </div>
         </div>
-      </div>
-      <div class="col-sm-4" class="timer-area" id="middle-col">
-        <div class="jumbotron">
-          <div class="row">
-            <p>Section 1 Middle</p>
-          </div>
-          <div id="icecream-img" class="row">
-            <p>Section 2 Middle</p>
-          </div>
-          <div class="row">
-            <p>Section 3 Middle</p>
+        <div class="col-sm-4" class="map-area" id="right-col">
+          <div id="direction-steps" class="jumbotron">
+            <p>Step by step directions for user</p>
+            <ol id="routeNarrativeOl"></ol>
           </div>
         </div>
       </div>
