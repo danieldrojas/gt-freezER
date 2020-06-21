@@ -1,4 +1,6 @@
 var userLocation;
+var imgArray = [];
+var image;
 $(document).ready(function () {
   userLocation = navigator.geolocation.getCurrentPosition(
     locationHandler,
@@ -78,10 +80,14 @@ function getIceCreamStores(loc) {
       var storeAddress = response.businesses[i].location.address1;
       // console.log(storeAddress);
       // console.log(iceCreamStores);
-      var iceCreamDistance = ("distance")
-      var timeToDistance = ("time")
+      var iceCreamDistance = "distance";
+      var timeToDistance = "time";
       var storeList = $("<button>").text(iceCreamStores);
       $(storeList).attr("class", "btn-block newIceCreamStoreButton");
+
+      // adding new id to each button
+      storeList.attr("id", iceCreamStores);
+
       storeList.append($("<div>" + storeAddress + "</div>"));
       storeList.append($("<div>" + iceCreamDistance + "</div>"));
       storeList.append($("<div>" + timeToDistance + "</div>"));
@@ -92,28 +98,22 @@ function getIceCreamStores(loc) {
       var lonPointB = response.businesses[i].coordinates.longitude;
       var startingPos = latPointA + "," + lonPointA;
       var destinationPos = latPointB + "," + lonPointB;
-      console.log("Starting: ",startingPos);
-      console.log("Destination: ",destinationPos);
+      console.log("Starting: ", startingPos);
+      console.log("Destination: ", destinationPos);
       var mapQuestKey = "bDYO5JVsT0lGPolecMUk1lCGVNostBHT";
       var pointA = startingPos;
       var pointB = destinationPos;
 
-//change
+      //change
       //this add the image to the main col. In the event of click on the button
-      var image = response.businesses[i].image_url
-      // console.log(image)
-      imageArray=[];
-      imageArray.push(image);
-      console.log(imageArray);
-      var imgDiv = $("<img>")
-      
-      imgDiv.attr('src', image)
-      $("#icecream-img").append(imgDiv)
-      
-      // button # = Array index
+      var image = response.businesses[i].image_url;
+      console.log(image);
+      imgArray.push(image);
+      console.log(imgArray);
 
-
-
+      // var imgDiv = $("<img>");
+      // imgDiv.attr("src", image);
+      // $("#icecream-img").append(imgDiv);
 
       var myURL =
         "https://www.mapquestapi.com/directions/v2/route?key=bDYO5JVsT0lGPolecMUk1lCGVNostBHT&from=" +
@@ -125,9 +125,13 @@ function getIceCreamStores(loc) {
         url: myURL,
         method: "GET",
       }).then(function (response) {
-        console.log(response);
-
+        // console.log(response);
       });
     }
   });
+  $("#iceCreamStores").on("click", function (event) {
+    event.preventDefault();
+    console.log("You clicked the button!", iceCreamStores);
+  });
 }
+console.log(imgArray);
