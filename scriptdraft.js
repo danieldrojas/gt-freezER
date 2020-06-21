@@ -2,15 +2,16 @@ var userLocation;
 var timeArray = [];
 var routeArray = [];
 var imgArray = [];
-var destinationArray = [];
+var urlArray = [];
+var storeNameArray = [];
 
 var routeTime = JSON.parse(localStorage.getItem("time"));
 
 function timeConvert(routeTime) {
-    var minutes = Math.floor(routeTime / 60);
-    var seconds = routeTime % 60;
-    console.log(minutes + ":" + seconds);
-  }
+  var minutes = Math.floor(routeTime / 60);
+  var seconds = routeTime % 60;
+  console.log(minutes + ":" + seconds);
+}
 
 $(document).ready(function () {
   userLocation = navigator.geolocation.getCurrentPosition(
@@ -78,15 +79,15 @@ function getIceCreamStores(loc) {
       // console.log(result);
     },
     error: function (error) {
-    //   console.log(error);
+      //   console.log(error);
     },
   }).then(function (response) {
-    // console.log(response);
+    console.log(response);
     $("#iceCreamStores").empty();
-
 
     for (var i = 0; i < 10; i++) {
       var iceCreamStores = response.businesses[i].name;
+      storeNameArray.push(iceCreamStores);
       var storeAddress = response.businesses[i].location.address1;
       var storeList = $("<button>").text(iceCreamStores);
       $(storeList).attr("class", "btn-block newIceCreamStoreButton");
@@ -94,32 +95,17 @@ function getIceCreamStores(loc) {
       var listItem = $("<li>").append(storeList);
       $("#iceCreamStores").append(listItem);
       storeList.append($("<div>" + storeAddress + "</div>"));
-
-
-    }
-    // This function is used to fill in all the steps in the right column
-        function renderSelectedDest() {
-      for (i = 0; i < response.route.legs[0].maneuvers.length; i++) {
-        var routeNarrative = $("<li>").text(
-          response.route.legs[0].maneuvers[i].narrative
-        );
-        $("#routeNarrativeOl").append(routeNarrative);
-      }
     }
 
-    
-    
+    for (var i = 0; i < 10; i++) {
+      var storeURL = response.businesses[i].url;
+      urlArray.push(storeURL);
+    }
 
     for (var i = 0; i < 10; i++) {
       var imageURL = response.businesses[i].image_url;
       imgArray.push(imageURL);
     }
-    /*     for (var i = 0; i < 10; i++) {
-      var userDestinations = ;
-      destinationArray.push(imageURL);
-    } */
-
-    //   var storeAddress = response.businesses[i].location.address1;
 
     // adding new id to each button
     var startingPos = latPointA + "," + lonPointA;
