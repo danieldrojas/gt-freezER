@@ -73,30 +73,9 @@ function getIceCreamStores(loc) {
       console.log(error);
     },
   }).then(function (response) {
-    console.log(response);
+    // console.log(response);
     $("#iceCreamStores").empty();
 
-    // var storeOne = response.businesses[0].name;
-    // var storeTwo = response.businesses[1].name;
-    // var storeThree = response.businesses[2].name;
-    // var storeFour = response.businesses[3].name;
-    // var storeFive = response.businesses[4].name;
-    // var storeSix = response.businesses[5].name;
-    // var storeSeven = response.businesses[6].name;
-    // var storeEight = response.businesses[7].name;
-    // var storeNine = response.businesses[8].name;
-    // var storeTen = response.businesses[9].name;
-
-    // console.log(storeOne);
-    // console.log(storeTwo);
-    // console.log(storeThree);
-    // console.log(storeFour);
-    // console.log(storeFive);
-    // console.log(storeSix);
-    // console.log(storeSeven);
-    // console.log(storeEight);
-    // console.log(storeNine);
-    // console.log(storeTen);
 
     for (var i = 0; i < 10; i++) {
       var iceCreamStores = response.businesses[i].name;
@@ -106,17 +85,26 @@ function getIceCreamStores(loc) {
       var listItem = $("<li>").append(storeList);
       $("#iceCreamStores").append(listItem);
     }
+    // This function is used to fill in all the steps in the right column
+    /*     function renderSelectedDest() {
+      for (i = 0; i < response.route.legs[0].maneuvers.length; i++) {
+        var routeNarrative = $("<li></li>").text(
+          response.route.legs[0].maneuvers[i].narrative
+        );
+        $("#routeNarrativeOl").append(routeNarrative);
+      }
+    }
+ */
 
     for (var i = 0; i < 10; i++) {
       var imageURL = response.businesses[i].image_url;
       imgArray.push(imageURL);
     }
-/*     for (var i = 0; i < 10; i++) {
+    /*     for (var i = 0; i < 10; i++) {
       var userDestinations = ;
       destinationArray.push(imageURL);
     } */
 
-    
     //   var storeAddress = response.businesses[i].location.address1;
 
     // adding new id to each button
@@ -157,121 +145,129 @@ function getIceCreamStores(loc) {
         //make this a function
       });
     }
+
+        // Trying to dynamically create the button event listeners
+/*     
+    function buttonEventListeners() {
+      for (i = 0; i < 10; i++) {
+        $("button" + i).on("click", function (event) {
+          event.preventDefault();
+          clearDivs();
+          // console.log("You clicked button 1!");
+          imgDiv.attr("src", imgArray[i]);
+          userDestination.text(response.businesses[i].name);
+          $("#icecream-img").append(imgDiv);
+          $("#selectedDestination").append(userDestination);
+          renderSelectedDest();
+        });
+      }
+    } */
+
     var imgDiv = $("<img>");
     var userDestination = $("<h2>");
 
-    $("#button1").on("click", function (event) {
-      event.preventDefault();
+    function clearDivs() {
       $("#icecream-img").empty();
       $("#selectedDestination").empty();
+    }
+
+    function appendDivs(){
+      $("#icecream-img").append(imgDiv);
+      $("#selectedDestination").append(userDestination);
+    }
+    $("#button1").on("click", function (event) {
+      event.preventDefault();
+      clearDivs();
       // console.log("You clicked button 1!");
       imgDiv.attr("src", imgArray[0]);
       userDestination.text(response.businesses[0].name);
-      $("#icecream-img").append(imgDiv);
-      $("#selectedDestination").append(userDestination);
+      appendDivs();
+      // renderSelectedDest();
     });
 
     $("#button2").on("click", function (event) {
       event.preventDefault();
-      $("#icecream-img").empty();
-      $("#selectedDestination").empty();
+      clearDivs();
       //console.log("You clicked button 2!");
       imgDiv.attr("src", imgArray[1]);
       userDestination.text(response.businesses[1].name);
-      $("#icecream-img").append(imgDiv);
-      $("#selectedDestination").append(userDestination);
+      appendDivs();
     });
 
     $("#button3").on("click", function (event) {
       event.preventDefault();
-      $("#icecream-img").empty();
-      $("#selectedDestination").empty();
+      clearDivs();
       //console.log("You clicked button 3!");
       imgDiv.attr("src", imgArray[2]);
       userDestination.text(response.businesses[2].name);
-      $("#icecream-img").append(imgDiv);
-      $("#selectedDestination").append(userDestination);
+      appendDivs();
     });
 
     $("#button4").on("click", function (event) {
       event.preventDefault();
-      $("#icecream-img").empty();
-      $("#selectedDestination").empty();
+      clearDivs();
       // console.log("You clicked button 4!");
       imgDiv.attr("src", imgArray[3]);
       userDestination.text(response.businesses[3].name);
-      $("#icecream-img").append(imgDiv);
-      $("#selectedDestination").append(userDestination);
+      appendDivs();
     });
 
     $("#button5").on("click", function (event) {
       event.preventDefault();
-      $("#icecream-img").empty();
-      $("#selectedDestination").empty();
+      clearDivs();
       // console.log("You clicked button 5!");
       imgDiv.attr("src", imgArray[4]);
       userDestination.text(response.businesses[4].name);
-      $("#icecream-img").append(imgDiv);
-      $("#selectedDestination").append(userDestination);
+      appendDivs();
     });
 
     $("#button6").on("click", function (event) {
       event.preventDefault();
-      $("#icecream-img").empty();
-      $("#selectedDestination").empty();
+      clearDivs();
       // console.log("You clicked button 6!");
       imgDiv.attr("src", imgArray[5]);
       userDestination.text(response.businesses[5].name);
-      $("#icecream-img").append(imgDiv);
-      $("#selectedDestination").append(userDestination);
+      appendDivs();
     });
 
     $("#button7").on("click", function (event) {
       event.preventDefault();
-      $("#icecream-img").empty();
-      $("#selectedDestination").empty();
+      clearDivs();
       // console.log("You clicked button 7!");
       imgDiv.attr("src", imgArray[6]);
       userDestination.text(response.businesses[5].name);
-      $("#icecream-img").append(imgDiv);
-      $("#selectedDestination").append(userDestination);
+      appendDivs();
     });
 
     $("#button8").on("click", function (event) {
       event.preventDefault();
-      $("#icecream-img").empty();
-      $("#selectedDestination").empty();
+      clearDivs();
       // console.log("You clicked button 8!");
       imgDiv.attr("src", imgArray[7]);
       userDestination.text(response.businesses[2].name);
-      $("#icecream-img").append(imgDiv);
-      $("#selectedDestination").append(userDestination);
+      appendDivs();
     });
 
     $("#button9").on("click", function (event) {
       event.preventDefault();
-      $("#icecream-img").empty();
-      $("#selectedDestination").empty();
+      clearDivs();
       // console.log("You clicked button 9!");
       imgDiv.attr("src", imgArray[8]);
       userDestination.text(response.businesses[8].name);
-      $("#icecream-img").append(imgDiv);
-      $("#selectedDestination").append(userDestination);
+      appendDivs();
     });
 
     $("#button10").on("click", function (event) {
       event.preventDefault();
-      $("#icecream-img").empty();
-      $("#selectedDestination").empty();
+      clearDivs();
       // console.log("You clicked button 10!");
       imgDiv.attr("src", imgArray[9]);
       userDestination.text(response.businesses[9].name);
-      $("#icecream-img").append(imgDiv);
-      $("#selectedDestination").append(userDestination);
+      appendDivs();
     });
   });
 }
 // console.log(routeArray);
 // console.log(timeArray);
-console.log(timeArray);
-console.log(imgArray);
+// console.log(timeArray);
+// console.log(imgArray);
