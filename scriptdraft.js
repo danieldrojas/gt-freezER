@@ -154,6 +154,7 @@ function getIceCreamStores(loc) {
 
     $("#button1").on("click", function (event) {
       event.preventDefault();
+      $("#icecream-img").empty();
       $("#storeURLButton").empty();
       console.log("You clicked button 1!");
       imgDiv.attr("src", imgArray[0]);
@@ -168,6 +169,7 @@ function getIceCreamStores(loc) {
 
     $("#button2").on("click", function (event) {
       event.preventDefault();
+      $("#icecream-img").empty();
       $("#storeURLButton").empty();
       console.log("You clicked button 2!");
       imgDiv.attr("src", imgArray[1]);
@@ -182,6 +184,7 @@ function getIceCreamStores(loc) {
 
     $("#button3").on("click", function (event) {
       event.preventDefault();
+      $("#icecream-img").empty();
       $("#storeURLButton").empty();
       console.log("You clicked button 3!");
       imgDiv.attr("src", imgArray[2]);
@@ -196,6 +199,7 @@ function getIceCreamStores(loc) {
 
     $("#button4").on("click", function (event) {
       event.preventDefault();
+      $("#icecream-img").empty();
       $("#storeURLButton").empty();
       console.log("You clicked button 4!");
       imgDiv.attr("src", imgArray[3]);
@@ -210,6 +214,7 @@ function getIceCreamStores(loc) {
 
     $("#button5").on("click", function (event) {
       event.preventDefault();
+      $("#icecream-img").empty();
       $("#storeURLButton").empty();
       console.log("You clicked button 5!");
       imgDiv.attr("src", imgArray[4]);
@@ -224,6 +229,7 @@ function getIceCreamStores(loc) {
 
     $("#button6").on("click", function (event) {
       event.preventDefault();
+      $("#icecream-img").empty();
       $("#storeURLButton").empty();
       console.log("You clicked button 6!");
       imgDiv.attr("src", imgArray[5]);
@@ -238,6 +244,7 @@ function getIceCreamStores(loc) {
 
     $("#button7").on("click", function (event) {
       event.preventDefault();
+      $("#icecream-img").empty();
       $("#storeURLButton").empty();
       console.log("You clicked button 7!");
       imgDiv.attr("src", imgArray[6]);
@@ -252,6 +259,7 @@ function getIceCreamStores(loc) {
 
     $("#button8").on("click", function (event) {
       event.preventDefault();
+      $("#icecream-img").empty();
       $("#storeURLButton").empty();
       console.log("You clicked button 8!");
       imgDiv.attr("src", imgArray[7]);
@@ -266,6 +274,7 @@ function getIceCreamStores(loc) {
 
     $("#button9").on("click", function (event) {
       event.preventDefault();
+      $("#icecream-img").empty();
       $("#storeURLButton").empty();
       console.log("You clicked button 9!");
       imgDiv.attr("src", imgArray[8]);
@@ -280,6 +289,7 @@ function getIceCreamStores(loc) {
 
     $("#button10").on("click", function (event) {
       event.preventDefault();
+      $("#icecream-img").empty();
       $("#storeURLButton").empty();
       console.log("You clicked button 10!");
       imgDiv.attr("src", imgArray[9]);
