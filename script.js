@@ -5,13 +5,16 @@ var imgArray = [];
 var urlArray = [];
 var storeNameArray = [];
 var arrayOfArrays = [];
-var routeTime = JSON.parse(localStorage.getItem("time"));
+var routeTime = localStorage.getItem("time")
+  ? JSON.parse(localStorage.getItem("time"))
+  : "";
+// console.log(timeArray);
 function timeConvert(routeTime) {
   var minutes = Math.floor(routeTime / 60);
   var seconds = routeTime % 60;
   return minutes + ":" + seconds;
   console.log(minutes + ":" + seconds);
-  return minutes + ":" + seconds;
+  // return minutes + ":" + seconds;
 }
 $(document).ready(function () {
   userLocation = navigator.geolocation.getCurrentPosition(
@@ -43,6 +46,7 @@ function locationHandler(pos) {
 function locationErrorHandler(err) {
   console.warn(`ERROR(${err.code}): ${err.message}`);
 }
+function determineTime(routeArray) {}
 function getIceCreamStores(loc) {
   var data = { term: "ice cream" };
   if (loc && loc.latitude) {
@@ -77,7 +81,7 @@ function getIceCreamStores(loc) {
       //   console.log(error);
     },
   }).then(function (response) {
-    console.log(response);
+    // console.log(response);
     $("#iceCreamStores").empty();
     for (var i = 0; i < 10; i++) {
       var iceCreamStores = response.businesses[i].name;
@@ -112,6 +116,7 @@ function getIceCreamStores(loc) {
       //   console.log("Destination: ", destinationPos);
       routeArray.push(destinationPos);
     }
+
     var mapQuestKey = "EuvsQjb9j05jti6cukSFr5sibH9t8NwF";
     for (var i = 0; i < routeArray.length; i++) {
       //   console.log(routeArray[i]);
@@ -139,7 +144,7 @@ function getIceCreamStores(loc) {
     // for (var i = 0; i < timeArray.length; i++){
     //   storeList.append($("<div>" + timeArray + "</div>"));
     // }
-    console.log(timeArray);
+
     var imgDiv = $("<img>");
     function directionsButtons(storeNumber) {
       $("#routeNarrativeOl").empty();
@@ -151,7 +156,7 @@ function getIceCreamStores(loc) {
         );
         // }
         // $("#routeNarrativeOl").append($("<li>" + arrayOfArrays[storeNumber][i+1].narrative + "</li>"))
-        console.log(arrayOfArrays[storeNumber][i].narrative);
+        // console.log(arrayOfArrays[storeNumber][i].narrative);
       }
     }
     var timerStart = "";
@@ -165,12 +170,19 @@ function getIceCreamStores(loc) {
       seconds = seconds < 0 ? 59 : seconds;
       seconds = seconds < 10 ? "0" + seconds : seconds;
       $("#timerDisplay").text(minutes + ":" + seconds);
-      $("#timerDisplay").attr("style", "display: inline-block");
+
+      if (minutes < 5) {
+        $("#timerDisplay").attr("class", "perfect");
+      } else if (minutes > 5 && minutes < 12) {
+        $("#timerDisplay").attr("class", "melting");
+      } else {
+        $("#timerDisplay").attr("class", "melted");
+      }
       timerStart = minutes + ":" + seconds;
       console.log(timerStart);
     }, 1000);
+
     // storeList.append($("<div>" + timeArray[0] + "</div>"));
-    console.log(timeArray[0]);
     $("#button1").on("click", function (event) {
       event.preventDefault();
       directionsButtons(0);
@@ -179,6 +191,7 @@ function getIceCreamStores(loc) {
       console.log("You clicked button 1!");
       imgDiv.attr("src", imgArray[0]);
       $("#icecream-img").append(imgDiv);
+      $("#timerDisplay").attr("style", "display: inline-block");
       var timeOne = timeConvert(routeTime[0]);
       timerStart = timeOne;
       console.log(timeConvert(routeTime[0]));
@@ -202,6 +215,7 @@ function getIceCreamStores(loc) {
       console.log("You clicked button 2!");
       imgDiv.attr("src", imgArray[1]);
       $("#icecream-img").append(imgDiv);
+      $("#timerDisplay").attr("style", "display: inline-block");
       var timeTwo = timeConvert(routeTime[1]);
       timerStart = timeTwo;
       console.log(timeConvert(routeTime[1]));
@@ -225,6 +239,7 @@ function getIceCreamStores(loc) {
       console.log("You clicked button 3!");
       imgDiv.attr("src", imgArray[2]);
       $("#icecream-img").append(imgDiv);
+      $("#timerDisplay").attr("style", "display: inline-block");
       var timeThree = timeConvert(routeTime[2]);
       timerStart = timeThree;
       console.log(timeConvert(routeTime[2]));
@@ -248,6 +263,7 @@ function getIceCreamStores(loc) {
       console.log("You clicked button 4!");
       imgDiv.attr("src", imgArray[3]);
       $("#icecream-img").append(imgDiv);
+      $("#timerDisplay").attr("style", "display: inline-block");
       var timeFour = timeConvert(routeTime[3]);
       timerStart = timeFour;
       console.log(timeConvert(routeTime[3]));
@@ -271,6 +287,7 @@ function getIceCreamStores(loc) {
       console.log("You clicked button 5!");
       imgDiv.attr("src", imgArray[4]);
       $("#icecream-img").append(imgDiv);
+      $("#timerDisplay").attr("style", "display: inline-block");
       var timeFive = timeConvert(routeTime[4]);
       timerStart = timeFive;
       console.log(timeConvert(routeTime[4]));
@@ -294,6 +311,7 @@ function getIceCreamStores(loc) {
       console.log("You clicked button 6!");
       imgDiv.attr("src", imgArray[5]);
       $("#icecream-img").append(imgDiv);
+      $("#timerDisplay").attr("style", "display: inline-block");
       var timeSix = timeConvert(routeTime[5]);
       timerStart = timeSix;
       console.log(timeConvert(routeTime[5]));
@@ -317,6 +335,7 @@ function getIceCreamStores(loc) {
       console.log("You clicked button 7!");
       imgDiv.attr("src", imgArray[6]);
       $("#icecream-img").append(imgDiv);
+      $("#timerDisplay").attr("style", "display: inline-block");
       var timeSeven = timeConvert(routeTime[6]);
       timerStart = timeSeven;
       console.log(timeConvert(routeTime[6]));
@@ -340,6 +359,7 @@ function getIceCreamStores(loc) {
       console.log("You clicked button 8!");
       imgDiv.attr("src", imgArray[7]);
       $("#icecream-img").append(imgDiv);
+      $("#timerDisplay").attr("style", "display: inline-block");
       var timeEight = timeConvert(routeTime[7]);
       timerStart = timeEight;
       console.log(timeConvert(routeTime[7]));
@@ -363,6 +383,7 @@ function getIceCreamStores(loc) {
       console.log("You clicked button 9!");
       imgDiv.attr("src", imgArray[8]);
       $("#icecream-img").append(imgDiv);
+      $("#timerDisplay").attr("style", "display: inline-block");
       var timeNine = timeConvert(routeTime[8]);
       timerStart = timeNine;
       console.log(timeConvert(routeTime[8]));
@@ -386,6 +407,7 @@ function getIceCreamStores(loc) {
       console.log("You clicked button 10!");
       imgDiv.attr("src", imgArray[9]);
       $("#icecream-img").append(imgDiv);
+      $("#timerDisplay").attr("style", "display: inline-block");
       var timeTen = timeConvert(routeTime[9]);
       timerStart = timeTen;
       console.log(timeConvert(routeTime[9]));
@@ -407,4 +429,4 @@ function getIceCreamStores(loc) {
 // console.log(imgArray);
 //  console.log(timeArray);
 // console.log(urlArray);
-console.log(storeNameArray);
+// console.log(storeNameArray);
