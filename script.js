@@ -11,6 +11,7 @@ var routeTime = JSON.parse(localStorage.getItem("time"));
 function timeConvert(routeTime) {
   var minutes = Math.floor(routeTime / 60);
   var seconds = routeTime % 60;
+  return minutes + ":" + seconds;
   console.log(minutes + ":" + seconds);
 }
 
@@ -89,13 +90,16 @@ function getIceCreamStores(loc) {
     for (var i = 0; i < 10; i++) {
       var iceCreamStores = response.businesses[i].name;
       storeNameArray.push(iceCreamStores);
-      var storeAddress = response.businesses[i].location.address1;
+      // var storeAddress = response.businesses[i].location.address1;
       var storeList = $("<button>").text(iceCreamStores);
       $(storeList).attr("class", "btn-block newIceCreamStoreButton");
       storeList.attr("id", "button" + (1 + i));
       var listItem = $("<li>").append(storeList);
       $("#iceCreamStores").append(listItem);
-      storeList.append($("<div>" + storeAddress + "</div>"));
+      // storeList.append($("<div>" + storeAddress + "</div>"));
+      storeList.append($("<div>" + timeConvert(routeTime[i])  + " minutes away! " + "</div>"));
+      // console.log(timeArray[0])
+
     }
 
     for (var i = 0; i < 10; i++) {
@@ -120,7 +124,7 @@ function getIceCreamStores(loc) {
       routeArray.push(destinationPos);
     }
 
-    var mapQuestKey = "ZZRRtGp9bjs0OUWpRQ8pC3Tgt1zc8QAR";
+    var mapQuestKey = "EuvsQjb9j05jti6cukSFr5sibH9t8NwF";
 
     for (var i = 0; i < routeArray.length; i++) {
       //   console.log(routeArray[i]);
@@ -145,8 +149,21 @@ function getIceCreamStores(loc) {
         timeArray.push(travelTime);
         localStorage.setItem("time", JSON.stringify(timeArray));
         arrayOfArrays.push(response.route.legs[0].maneuvers)
+
+     
+
       });
+
+
+      // storeList.append($("<div>" + storeAddress + "</div>"));  
     }
+
+    // for (var i = 0; i < timeArray.length; i++){
+    //   storeList.append($("<div>" + timeArray + "</div>"));
+
+
+    // }
+    console.log(timeArray)
 
     var imgDiv = $("<img>");
 
@@ -171,6 +188,9 @@ function getIceCreamStores(loc) {
     // var storeLink = $("<button>");
     // $(storeLink).attr("class", "btn-block storeLinkButton");
     // $("#storeURLButton").append(storeLink);
+
+     // storeList.append($("<div>" + timeArray[0] + "</div>"));
+      console.log(timeArray[0])
 
     $("#button1").on("click", function (event) {
       event.preventDefault();
