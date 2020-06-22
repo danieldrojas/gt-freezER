@@ -89,7 +89,7 @@ function getIceCreamStores(loc) {
     },
     data: data,
     success: function (result) {
-      console.log(result);
+      // console.log(result);
     },
     error: function (error) {
       console.log(error);
