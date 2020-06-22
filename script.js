@@ -110,7 +110,6 @@ function getIceCreamStores(loc) {
     var startingPos = latPointA + "," + lonPointA;
     console.log('THIS IS THE STARTING startingPos!', startingPos)
     var pointA = startingPos;
-
     for (var i = 0; i < 10; i++) {
       var latPointB = response.businesses[i].coordinates.latitude;
       var lonPointB = response.businesses[i].coordinates.longitude;
@@ -118,7 +117,7 @@ function getIceCreamStores(loc) {
       //   console.log("Destination: ", destinationPos);
       routeArray.push(destinationPos);
     }
-
+  
     var mapQuestKey = "EuvsQjb9j05jti6cukSFr5sibH9t8NwF";
     for (let i = 0; i < routeArray.length; i++) {
       console.log('THIS IS I right before mapquest api call', i)
@@ -177,8 +176,7 @@ function getIceCreamStores(loc) {
     function directionsButtons(storeNumber) {
       $("#routeNarrativeOl").empty();
       for (var i = 0; i < arrayOfArrays[storeNumber].length; i++) {
-        // if (arrayOfArrays[storeNumber][i].narrative === undefined) {
-        // i++
+
         $("#routeNarrativeOl").append(
           $("<li>" + arrayOfArrays[storeNumber][i].narrative + "</li>")
         );
