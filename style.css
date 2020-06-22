@@ -9,11 +9,11 @@ header {
 }
 
 #freez {
-    color: #feb902;
+  color: #feb902;
 }
 
-#ER{
-color: #e13a32;
+#ER {
+  color: #e13a32;
 }
 body {
   background-color: #66a9d1;
@@ -25,7 +25,7 @@ body {
 }
 
 #middleCol {
-    background-color: #0a6082;
+  background-color: #0a6082;
 }
 
 #iceCreamStores {
@@ -73,22 +73,21 @@ img {
   font-size: medium;
 }
 
-
 #descriptionMelted {
-  color:  #e13a32;
+  color: #e13a32;
   font-size: medium;
 }
 
 .perfect {
-color: #0a6082;
+  color: #0a6082;
 }
 
 .melting {
-color: #f1882a;
+  color: #f1882a;
 }
 
 .melted {
-color:  #e13a32;
+  color: #e13a32;
 }
 
 #button1 {
@@ -114,20 +113,21 @@ color:  #e13a32;
 }
 
 #button6 {
-  background-color: #ff75a8;
+  background-color: #9f7ca6;
   color: whitesmoke;
 }
 
 #button7 {
-  background-color: #e0dbbf;
+  background-color: #ec6e18;
 }
 #button8 {
-  background-color: #562a1c;
+  background-color: #0a6082;
   color: whitesmoke;
 }
 #button9 {
-  background-color: #accc40;
+  background-color: #b33951;
 }
 #button10 {
-  background-color: #efd19b;
+  background-color: #482728;
+  color: whitesmoke;
 }
