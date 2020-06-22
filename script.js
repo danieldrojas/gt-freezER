@@ -6,8 +6,8 @@ var urlArray = [];
 var storeNameArray = [];
 var arrayOfArrays = [];
 var routeTime = localStorage.getItem("time")
-? JSON.parse(localStorage.getItem("time"))
-: "";
+  ? JSON.parse(localStorage.getItem("time"))
+  : [];
 // console.log(timeArray);
 function timeConvert(routeTime) {
   var minutes = Math.floor(routeTime / 60);
@@ -45,9 +45,7 @@ function locationHandler(pos) {
 function locationErrorHandler(err) {
   console.warn(`ERROR(${err.code}): ${err.message}`);
 }
-function determineTime (routeArray) {
-  
-}
+function determineTime(routeArray) {}
 function getIceCreamStores(loc) {
   var data = { term: "ice cream" };
   if (loc && loc.latitude) {
@@ -115,7 +113,7 @@ function getIceCreamStores(loc) {
       //   console.log("Destination: ", destinationPos);
       routeArray.push(destinationPos);
     }
-  
+
     var mapQuestKey = "EuvsQjb9j05jti6cukSFr5sibH9t8NwF";
     for (var i = 0; i < routeArray.length; i++) {
       //   console.log(routeArray[i]);
@@ -139,12 +137,11 @@ function getIceCreamStores(loc) {
         arrayOfArrays.push(response.route.legs[0].maneuvers);
       });
     }
-    
+
     var imgDiv = $("<img>");
     function directionsButtons(storeNumber) {
       $("#routeNarrativeOl").empty();
       for (var i = 0; i < arrayOfArrays[storeNumber].length; i++) {
-
         $("#routeNarrativeOl").append(
           $("<li>" + arrayOfArrays[storeNumber][i].narrative + "</li>")
         );
@@ -161,7 +158,7 @@ function getIceCreamStores(loc) {
       seconds = seconds < 0 ? 59 : seconds;
       seconds = seconds < 10 ? "0" + seconds : seconds;
       $("#timerDisplay").text(minutes + ":" + seconds);
-      
+
       if (minutes < 5) {
         $("#timerDisplay").attr("class", "perfect");
       } else if (minutes > 5 && minutes < 12) {
