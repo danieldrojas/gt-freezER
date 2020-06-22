@@ -12,6 +12,7 @@ function timeConvert(routeTime) {
   var minutes = Math.floor(routeTime / 60);
   var seconds = routeTime % 60;
   console.log(minutes + ":" + seconds);
+  return minutes + ":" + seconds;
 }
 
 $(document).ready(function () {
@@ -20,6 +21,12 @@ $(document).ready(function () {
     locationErrorHandler,
     options
   );
+
+  
+
+
+  // $("#timerDisplay").append(timerStart);
+
   $("#zipcode-submit").on("click", function () {
     var zipcode = $("#zipcode-input").val();
     getIceCreamStores(zipcode);
@@ -120,7 +127,7 @@ function getIceCreamStores(loc) {
       routeArray.push(destinationPos);
     }
 
-    var mapQuestKey = "ZZRRtGp9bjs0OUWpRQ8pC3Tgt1zc8QAR";
+    var mapQuestKey = "EuvsQjb9j05jti6cukSFr5sibH9t8NwF";
 
     for (var i = 0; i < routeArray.length; i++) {
       //   console.log(routeArray[i]);
@@ -168,9 +175,6 @@ function getIceCreamStores(loc) {
 
     }
 
-    // var storeLink = $("<button>");
-    // $(storeLink).attr("class", "btn-block storeLinkButton");
-    // $("#storeURLButton").append(storeLink);
 
     $("#button1").on("click", function (event) {
       event.preventDefault();
