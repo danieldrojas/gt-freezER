@@ -44,5 +44,5 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 
 ## Contributing
 
-Not currently accepting contributors at the moment.
+Michael Nava, Min Pak, Daniel Rojas & Brad Williams
 
