@@ -59,6 +59,10 @@ img {
   margin-right: auto;
 }
 
+#timerDisplay {
+  display: none;
+}
+
 #button1 {
   background-color: #ff75a8;
   color: whitesmoke;
