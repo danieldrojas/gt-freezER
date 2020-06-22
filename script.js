@@ -1,12 +1,14 @@
 var userLocation;
+// arrays for storing business info below
 var timeArray = {};
 var routeArray = [];
 var imgArray = [];
 var urlArray = [];
 var storeNameArray = [];
 var arrayOfArrays = [];
+// empty string for route time to later feed in generated info
 var routeTime = "";
-
+// converting route time to minutes and seconds
 function timeConvert(routeTime) {
   var minutes = Math.floor(routeTime / 60);
   var seconds = routeTime % 60;
@@ -15,14 +17,14 @@ function timeConvert(routeTime) {
   }
   return minutes + ":" + seconds;
 }
-
+// running geolocation for allow/block
 $(document).ready(function () {
   userLocation = navigator.geolocation.getCurrentPosition(
     locationHandler,
     locationErrorHandler,
     options
   );
-
+  // zipcode submit fields here, clears all arrays and empties button div
   $("#zipcode-submit").on("click", function () {
     $("#iceCreamStores").empty();
     timeArray = [];
@@ -136,16 +138,13 @@ function getIceCreamStores(loc) {
       $.ajax({
         url: myURL,
         method: "GET",
+        // generate buttons below
       }).then(function (res) {
         var travelTime = res.route.realTime;
-
         timeArray[i] = travelTime;
         arrayOfArrays.push(res.route.legs[0].maneuvers);
-
         var iceCreamStores = response.businesses[i].name;
-
         storeNameArray.push(iceCreamStores);
-
         var storeList = $("<button>").text(iceCreamStores);
         $(storeList).attr("class", "btn-block newIceCreamStoreButton");
         storeList.attr("id", "button" + (1 + i));
@@ -167,6 +166,7 @@ function getIceCreamStores(loc) {
         );
       }
     }
+    // timer start, using button clicks to dynamically change timer start
     var timerStart = "";
     var timerInterval = setInterval(function () {
       var timer = timerStart.split(":");
@@ -187,7 +187,7 @@ function getIceCreamStores(loc) {
       }
       timerStart = minutes + ":" + seconds;
     }, 1000);
-
+    // adds url image and store name to middle column
     $(document).on("click", "#button1", function (event) {
       event.preventDefault();
       directionsButtons(0);
