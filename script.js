@@ -5,13 +5,14 @@ var imgArray = [];
 var urlArray = [];
 var storeNameArray = [];
 var arrayOfArrays = [];
-var routeTime = localStorage.getItem("time")
-  ? JSON.parse(localStorage.getItem("time"))
-  : "";
+var routeTime = "";
 // console.log(timeArray);
 function timeConvert(routeTime) {
   var minutes = Math.floor(routeTime / 60);
   var seconds = routeTime % 60;
+  if(seconds < 10){
+    seconds = "0"+seconds;
+  }
   return minutes + ":" + seconds;
   console.log(minutes + ":" + seconds);
   // return minutes + ":" + seconds;
@@ -25,12 +26,19 @@ $(document).ready(function () {
   );
   // $("#timerDisplay").append(timerStart);
   $("#zipcode-submit").on("click", function () {
+    $("#iceCreamStores").empty();
+    timeArray = [];
+    routeArray = [];
+    imgArray = [];
+    urlArray = [];
+    storeNameArray = [];
+    arrayOfArrays = [];
+    $("#timerDisplay").attr("style", "display: none");
     var zipcode = $("#zipcode-input").val();
     getIceCreamStores(zipcode);
   });
   return userLocation;
 });
-
 
 // pulled following location data from
 // https://developer.mozilla.org/en-US/docs/Web/API/Geolocation/getCurrentPosition
@@ -41,7 +49,7 @@ var options = {
 };
 function locationHandler(pos) {
   var crd = pos.coords;
-  console.log('THIS IS THE crd!!! ', crd)
+  console.log("THIS IS THE crd!!! ", crd);
   getIceCreamStores(crd);
   console.log("Your current position is:");
   console.log("Latitude: " + crd.latitude);
@@ -50,19 +58,18 @@ function locationHandler(pos) {
 function locationErrorHandler(err) {
   console.warn(`ERROR(${err.code}): ${err.message}`);
 }
-function determineTime(routeArray) {
-
-}
+function determineTime(routeArray) {}
 
 function getIceCreamStores(loc) {
   var data = { term: "ice cream" };
-
+  var hasZip = false;
   if (loc && loc.latitude) {
     data.latitude = loc.latitude;
     data.longitude = loc.longitude;
   } else if (loc) {
     if (loc.length === 5 && Number(loc)) {
       data.location = loc;
+      hasZip = true;
     }
     if (!(data.lattitude && data.longitude) && !data.location) {
       alert("Please enter a valid Zip Code.");
@@ -80,7 +87,7 @@ function getIceCreamStores(loc) {
     "https://cors-anywhere.herokuapp.com/https://api.yelp.com/v3/businesses/search?";
   var APIkey =
     "pZoeLz1SZU0FpO7ZzMtXIQ9dSW1UZ3Wp762C53LAb3zgJeMNvtwIQUCJL2-8hAAquHFK2XIiamEuOUXbuw5Rre3ie_pe1vknYXD9bCDCmd53ztY7KsdjUuIxlVvqXnYx";
-  
+
   $.ajax({
     url: URL,
     method: "GET",
@@ -97,7 +104,7 @@ function getIceCreamStores(loc) {
   }).then(function (response) {
     // console.log(response);
     $("#iceCreamStores").empty();
-    
+
     for (var i = 0; i < 10; i++) {
       var storeURL = response.businesses[i].url;
       urlArray.push(storeURL);
@@ -107,8 +114,16 @@ function getIceCreamStores(loc) {
       imgArray.push(imageURL);
     }
     // adding new id to each button
-    var startingPos = latPointA + "," + lonPointA;
-    console.log('THIS IS THE STARTING startingPos!', startingPos)
+    var startingPos;
+    //  = latPointA + "," + lonPointA;
+
+    if (hasZip) {
+      startingPos = data.location;
+    } else {
+      startingPos = latPointA + "," + lonPointA;
+    }
+
+    console.log("THIS IS THE STARTING startingPos!", startingPos);
     var pointA = startingPos;
     for (var i = 0; i < 10; i++) {
       var latPointB = response.businesses[i].coordinates.latitude;
@@ -120,11 +135,11 @@ function getIceCreamStores(loc) {
 
     var mapQuestKey = "EuvsQjb9j05jti6cukSFr5sibH9t8NwF";
     for (let i = 0; i < routeArray.length; i++) {
-      console.log('THIS IS I right before mapquest api call', i)
+      console.log("THIS IS I right before mapquest api call", i);
       //   console.log(routeArray[i]);
       var pointB = routeArray[i];
       // var pointB = destinationPos;
-      var k = 0
+      var k = 0;
       var myURL =
         "https://www.mapquestapi.com/directions/v2/route?key=" +
         mapQuestKey +
@@ -137,34 +152,42 @@ function getIceCreamStores(loc) {
         method: "GET",
       }).then(function (res) {
         var travelTime = res.route.realTime;
-        console.log('THIS IS THE travel time coming back from mapquest!!!', res.route.realTime, pointA, pointB)
+        console.log(
+          "THIS IS THE travel time coming back from mapquest!!!",
+          res.route.realTime,
+          pointA,
+          pointB
+        );
         // console.log(travelTime);
-        timeArray[i] = travelTime
+        timeArray[i] = travelTime;
         //localStorage.setItem("time", JSON.stringify(timeArray));
         arrayOfArrays.push(res.route.legs[0].maneuvers);
-      
-        console.log('THIS IS ITME ARRAY before for loop to diplsay results', timeArray)
+
+        console.log(
+          "THIS IS ITME ARRAY before for loop to diplsay results",
+          timeArray
+        );
         //for (var i = 0; i < 10; i++) {
         var iceCreamStores = response.businesses[i].name;
-        console.log('THIS IS our name every time ?? response.businesses', response.businesses)
-        console.log('This is i right before we dispaly text', i)
-          storeNameArray.push(iceCreamStores);
-          // var storeAddress = response.businesses[i].location.address1;
-          var storeList = $("<button>").text(iceCreamStores);
-          $(storeList).attr("class", "btn-block newIceCreamStoreButton");
-          storeList.attr("id", "button" + (1 + i));
-          var listItem = $("<li>").append(storeList);
-          $("#iceCreamStores").append(listItem);
-          // storeList.append($("<div>" + storeAddress + "</div>"));
-          storeList.append(
-            //$("<div>" + timeConvert(routeTime[i]) + " minutes away! " + "</div>")
-            $("<div>" + timeConvert(timeArray[i]) + " minutes away! " + "</div>")
-          );
-          // console.log(timeArray[0])
+        console.log(
+          "THIS IS our name every time ?? response.businesses",
+          response.businesses
+        );
+        console.log("This is i right before we dispaly text", i);
+        storeNameArray.push(iceCreamStores);
+        // var storeAddress = response.businesses[i].location.address1;
+        var storeList = $("<button>").text(iceCreamStores);
+        $(storeList).attr("class", "btn-block newIceCreamStoreButton");
+        storeList.attr("id", "button" + (1 + i));
+        var listItem = $("<li>").append(storeList);
+        $("#iceCreamStores").append(listItem);
+        // storeList.append($("<div>" + storeAddress + "</div>"));
+        storeList.append(
+          //$("<div>" + timeConvert(routeTime[i]) + " minutes away! " + "</div>")
+          $("<div>" + timeConvert(timeArray[i]) + " minutes away! " + "</div>")
+        );
+        // console.log(timeArray[0])
         //}
-      
-      
-      
       });
       // storeList.append($("<div>" + storeAddress + "</div>"));
     }
@@ -186,7 +209,7 @@ function getIceCreamStores(loc) {
     }
     var timerStart = "";
     var timerInterval = setInterval(function () {
-      console.log('TIME IS STARTING TO TICK!!!!!!!')
+      console.log("TIME IS STARTING TO TICK!!!!!!!");
       var timer = timerStart.split(":");
       var minutes = parseInt(timer[0], 10);
       var seconds = parseInt(timer[1], 10);
@@ -199,7 +222,7 @@ function getIceCreamStores(loc) {
 
       if (minutes < 5) {
         $("#timerDisplay").attr("class", "perfect");
-      } else if (minutes > 5 && minutes < 12) {
+      } else if (minutes >= 5 && minutes < 12) {
         $("#timerDisplay").attr("class", "melting");
       } else {
         $("#timerDisplay").attr("class", "melted");
@@ -212,7 +235,7 @@ function getIceCreamStores(loc) {
     $(document).on("click", "#button1", function (event) {
       event.preventDefault();
       directionsButtons(0);
-      console.log('Thgis is ROUTE TIME!!!!', timeArray)
+      console.log("This is ROUTE TIME!!!!", timeArray);
       $("#icecream-img").empty();
       $("#storeURLButton").empty();
       console.log("You clicked button 1!");
@@ -221,8 +244,8 @@ function getIceCreamStores(loc) {
       $("#timerDisplay").attr("style", "display: inline-block");
       var timeOne = timeConvert(timeArray[0]);
       timerStart = timeOne;
-      console.log('This is time one!!!!', timeOne)
-      console.log('Thgis is ROUTE TIME!!!!', routeTime)
+      console.log("This is time one!!!!", timeOne);
+      console.log("Thgis is ROUTE TIME!!!!", routeTime);
       console.log(timeConvert(routeTime[0]));
       $("#storeHeader").text(storeNameArray[0]);
       var storeLink = $("<button>");
@@ -231,13 +254,13 @@ function getIceCreamStores(loc) {
       storeLink.append(
         $(
           "<a href='" +
-          urlArray[0] +
-          "' target='_blank'> Click here for our store hours, menu & more!</a>"
+            urlArray[0] +
+            "' target='_blank'> Click here for our store hours, menu & more!</a>"
         )
       );
     });
     $(document).on("click", "#button2", function (event) {
-      console.log('CLICK 2 HAPPENING!!!')
+      console.log("CLICK 2 HAPPENING!!!");
       event.preventDefault();
       directionsButtons(1);
       $("#icecream-img").empty();
@@ -256,8 +279,8 @@ function getIceCreamStores(loc) {
       storeLink.append(
         $(
           "<a href='" +
-          urlArray[1] +
-          "' target='_blank'> Click here for our store hours, menu & more!</a>"
+            urlArray[1] +
+            "' target='_blank'> Click here for our store hours, menu & more!</a>"
         )
       );
     });
@@ -280,8 +303,8 @@ function getIceCreamStores(loc) {
       storeLink.append(
         $(
           "<a href='" +
-          urlArray[2] +
-          "' target='_blank'> Click here for our store hours, menu & more!</a>"
+            urlArray[2] +
+            "' target='_blank'> Click here for our store hours, menu & more!</a>"
         )
       );
     });
@@ -304,8 +327,8 @@ function getIceCreamStores(loc) {
       storeLink.append(
         $(
           "<a href='" +
-          urlArray[3] +
-          "' target='_blank'> Click here for our store hours, menu & more!</a>"
+            urlArray[3] +
+            "' target='_blank'> Click here for our store hours, menu & more!</a>"
         )
       );
     });
@@ -328,8 +351,8 @@ function getIceCreamStores(loc) {
       storeLink.append(
         $(
           "<a href='" +
-          urlArray[4] +
-          "' target='_blank'> Click here for our store hours, menu & more!</a>"
+            urlArray[4] +
+            "' target='_blank'> Click here for our store hours, menu & more!</a>"
         )
       );
     });
@@ -352,8 +375,8 @@ function getIceCreamStores(loc) {
       storeLink.append(
         $(
           "<a href='" +
-          urlArray[5] +
-          "' target='_blank'> Click here for our store hours, menu & more!</a>"
+            urlArray[5] +
+            "' target='_blank'> Click here for our store hours, menu & more!</a>"
         )
       );
     });
@@ -376,8 +399,8 @@ function getIceCreamStores(loc) {
       storeLink.append(
         $(
           "<a href='" +
-          urlArray[6] +
-          "' target='_blank'> Click here for our store hours, menu & more!</a>"
+            urlArray[6] +
+            "' target='_blank'> Click here for our store hours, menu & more!</a>"
         )
       );
     });
@@ -400,8 +423,8 @@ function getIceCreamStores(loc) {
       storeLink.append(
         $(
           "<a href='" +
-          urlArray[7] +
-          "' target='_blank'> Click here for our store hours, menu & more!</a>"
+            urlArray[7] +
+            "' target='_blank'> Click here for our store hours, menu & more!</a>"
         )
       );
     });
@@ -424,8 +447,8 @@ function getIceCreamStores(loc) {
       storeLink.append(
         $(
           "<a href='" +
-          urlArray[8] +
-          "' target='_blank'> Click here for our store hours, menu & more!</a>"
+            urlArray[8] +
+            "' target='_blank'> Click here for our store hours, menu & more!</a>"
         )
       );
     });
@@ -448,8 +471,8 @@ function getIceCreamStores(loc) {
       storeLink.append(
         $(
           "<a href='" +
-          urlArray[9] +
-          "' target='_blank'> Click here for our store hours, menu & more!</a>"
+            urlArray[9] +
+            "' target='_blank'> Click here for our store hours, menu & more!</a>"
         )
       );
     });
