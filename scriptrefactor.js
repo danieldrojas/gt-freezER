@@ -6,18 +6,14 @@ var urlArray = [];
 var storeNameArray = [];
 var arrayOfArrays = [];
 
-var routeTime = localStorage.getItem("time")
-? JSON.parse(localStorage.getItem("time"))
-: "";
-
-// console.log(timeArray);
+var routeTime = JSON.parse(localStorage.getItem("time"));
 
 function timeConvert(routeTime) {
   var minutes = Math.floor(routeTime / 60);
   var seconds = routeTime % 60;
   return minutes + ":" + seconds;
   console.log(minutes + ":" + seconds);
-  // return minutes + ":" + seconds;
+  return minutes + ":" + seconds;
 }
 
 $(document).ready(function () {
@@ -58,10 +54,6 @@ function locationErrorHandler(err) {
   console.warn(`ERROR(${err.code}): ${err.message}`);
 }
 
-function determineTime (routeArray) {
-  
-}
-
 function getIceCreamStores(loc) {
   var data = { term: "ice cream" };
   if (loc && loc.latitude) {
@@ -76,6 +68,36 @@ function getIceCreamStores(loc) {
       return;
     }
   }
+  function buttonCreation() {
+    var iceCreamStores = response.businesses[i].name;
+    storeNameArray.push(iceCreamStores);
+    // var storeAddress = response.businesses[i].location.address1;
+    var storeList = $("<button>").text(iceCreamStores);
+    $(storeList).attr("class", "btn-block newIceCreamStoreButton");
+    storeList.attr("id", "button" + (1 + i));
+    var listItem = $("<li>").append(storeList);
+    $("#iceCreamStores").append(listItem);
+    // storeList.append($("<div>" + storeAddress + "</div>"));
+    storeList.append(
+      $("<div>" + timeConvert(routeTime[i]) + " minutes away! " + "</div>")
+    );
+  }
+  // assigning buttons from yelp Ajax call
+  function buttonCreation() {
+    var iceCreamStores = response.businesses[i].name;
+    storeNameArray.push(iceCreamStores);
+    // var storeAddress = response.businesses[i].location.address1;
+    var storeList = $("<button>").text(iceCreamStores);
+    $(storeList).attr("class", "btn-block newIceCreamStoreButton");
+    storeList.attr("id", "button" + (1 + i));
+    var listItem = $("<li>").append(storeList);
+    $("#iceCreamStores").append(listItem);
+    // storeList.append($("<div>" + storeAddress + "</div>"));
+    storeList.append(
+      $("<div>" + timeConvert(routeTime[i]) + " minutes away! " + "</div>")
+    );
+  }
+  // Ajax call for Yelp
   var latPointA = loc.latitude;
   var lonPointA = loc.longitude;
   var URL =
@@ -96,22 +118,12 @@ function getIceCreamStores(loc) {
       //   console.log(error);
     },
   }).then(function (response) {
-    // console.log(response);
+    console.log(response);
     $("#iceCreamStores").empty();
 
     for (var i = 0; i < 10; i++) {
-      var iceCreamStores = response.businesses[i].name;
-      storeNameArray.push(iceCreamStores);
-      // var storeAddress = response.businesses[i].location.address1;
-      var storeList = $("<button>").text(iceCreamStores);
-      $(storeList).attr("class", "btn-block newIceCreamStoreButton");
-      storeList.attr("id", "button" + (1 + i));
-      var listItem = $("<li>").append(storeList);
-      $("#iceCreamStores").append(listItem);
-      // storeList.append($("<div>" + storeAddress + "</div>"));
-      storeList.append(
-        $("<div>" + timeConvert(routeTime[i]) + " minutes away! " + "</div>")
-      );
+      buttonCreation();
+
       // console.log(timeArray[0])
     }
 
@@ -136,7 +148,7 @@ function getIceCreamStores(loc) {
       //   console.log("Destination: ", destinationPos);
       routeArray.push(destinationPos);
     }
-  
+
     var mapQuestKey = "EuvsQjb9j05jti6cukSFr5sibH9t8NwF";
 
     for (var i = 0; i < routeArray.length; i++) {
@@ -171,7 +183,7 @@ function getIceCreamStores(loc) {
     //   storeList.append($("<div>" + timeArray + "</div>"));
 
     // }
-    
+    console.log(timeArray);
 
     var imgDiv = $("<img>");
 
@@ -188,7 +200,7 @@ function getIceCreamStores(loc) {
         // }
         // $("#routeNarrativeOl").append($("<li>" + arrayOfArrays[storeNumber][i+1].narrative + "</li>"))
 
-        // console.log(arrayOfArrays[storeNumber][i].narrative);
+        console.log(arrayOfArrays[storeNumber][i].narrative);
       }
     }
 
@@ -203,7 +215,7 @@ function getIceCreamStores(loc) {
       seconds = seconds < 0 ? 59 : seconds;
       seconds = seconds < 10 ? "0" + seconds : seconds;
       $("#timerDisplay").text(minutes + ":" + seconds);
-      
+
       if (minutes < 5) {
         $("#timerDisplay").attr("class", "perfect");
       } else if (minutes > 5 && minutes < 12) {
@@ -215,13 +227,13 @@ function getIceCreamStores(loc) {
       console.log(timerStart);
     }, 1000);
 
-  
-
     // storeList.append($("<div>" + timeArray[0] + "</div>"));
+    console.log(timeArray[0]);
 
     $("#button1").on("click", function (event) {
       event.preventDefault();
       directionsButtons(0);
+
       $("#icecream-img").empty();
       $("#storeURLButton").empty();
       console.log("You clicked button 1!");
@@ -484,5 +496,4 @@ function getIceCreamStores(loc) {
 // console.log(imgArray);
 //  console.log(timeArray);
 // console.log(urlArray);
-// console.log(storeNameArray);
-
+console.log(storeNameArray);
