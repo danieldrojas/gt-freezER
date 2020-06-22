@@ -63,6 +63,34 @@ img {
   display: none;
 }
 
+#descriptionPerfect {
+  color: #0a6082;
+  font-size: medium;
+}
+
+#descriptionMelting {
+  color: #f1882a;
+  font-size: medium;
+}
+
+
+#descriptionMelted {
+  color:  #e13a32;
+  font-size: medium;
+}
+
+.perfect {
+color: #0a6082;
+}
+
+.melting {
+color: #f1882a;
+}
+
+.melted {
+color:  #e13a32;
+}
+
 #button1 {
   background-color: #ff75a8;
   color: whitesmoke;

@@ -195,10 +195,19 @@ function getIceCreamStores(loc) {
       seconds = seconds < 0 ? 59 : seconds;
       seconds = seconds < 10 ? "0" + seconds : seconds;
       $("#timerDisplay").text(minutes + ":" + seconds);
-      $("#timerDisplay").attr("style", "display: inline-block");
+      
+      if (minutes < 5) {
+        $("#timerDisplay").attr("class", "perfect");
+      } else if (minutes > 5 && minutes < 12) {
+        $("#timerDisplay").attr("class", "melting");
+      } else {
+        $("#timerDisplay").attr("class", "melted");
+      }
       timerStart = minutes + ":" + seconds;
       console.log(timerStart);
     }, 1000);
+
+  
 
     // storeList.append($("<div>" + timeArray[0] + "</div>"));
     console.log(timeArray[0]);
@@ -212,6 +221,7 @@ function getIceCreamStores(loc) {
       console.log("You clicked button 1!");
       imgDiv.attr("src", imgArray[0]);
       $("#icecream-img").append(imgDiv);
+      $("#timerDisplay").attr("style", "display: inline-block");
       var timeOne = timeConvert(routeTime[0]);
       timerStart = timeOne;
       console.log(timeConvert(routeTime[0]));
@@ -237,6 +247,7 @@ function getIceCreamStores(loc) {
       console.log("You clicked button 2!");
       imgDiv.attr("src", imgArray[1]);
       $("#icecream-img").append(imgDiv);
+      $("#timerDisplay").attr("style", "display: inline-block");
       var timeTwo = timeConvert(routeTime[1]);
       timerStart = timeTwo;
       console.log(timeConvert(routeTime[1]));
@@ -262,6 +273,7 @@ function getIceCreamStores(loc) {
       console.log("You clicked button 3!");
       imgDiv.attr("src", imgArray[2]);
       $("#icecream-img").append(imgDiv);
+      $("#timerDisplay").attr("style", "display: inline-block");
       var timeThree = timeConvert(routeTime[2]);
       timerStart = timeThree;
       console.log(timeConvert(routeTime[2]));
@@ -287,6 +299,7 @@ function getIceCreamStores(loc) {
       console.log("You clicked button 4!");
       imgDiv.attr("src", imgArray[3]);
       $("#icecream-img").append(imgDiv);
+      $("#timerDisplay").attr("style", "display: inline-block");
       var timeFour = timeConvert(routeTime[3]);
       timerStart = timeFour;
       console.log(timeConvert(routeTime[3]));
@@ -312,6 +325,7 @@ function getIceCreamStores(loc) {
       console.log("You clicked button 5!");
       imgDiv.attr("src", imgArray[4]);
       $("#icecream-img").append(imgDiv);
+      $("#timerDisplay").attr("style", "display: inline-block");
       var timeFive = timeConvert(routeTime[4]);
       timerStart = timeFive;
       console.log(timeConvert(routeTime[4]));
@@ -337,6 +351,7 @@ function getIceCreamStores(loc) {
       console.log("You clicked button 6!");
       imgDiv.attr("src", imgArray[5]);
       $("#icecream-img").append(imgDiv);
+      $("#timerDisplay").attr("style", "display: inline-block");
       var timeSix = timeConvert(routeTime[5]);
       timerStart = timeSix;
       console.log(timeConvert(routeTime[5]));
@@ -362,6 +377,7 @@ function getIceCreamStores(loc) {
       console.log("You clicked button 7!");
       imgDiv.attr("src", imgArray[6]);
       $("#icecream-img").append(imgDiv);
+      $("#timerDisplay").attr("style", "display: inline-block");
       var timeSeven = timeConvert(routeTime[6]);
       timerStart = timeSeven;
       console.log(timeConvert(routeTime[6]));
@@ -387,6 +403,7 @@ function getIceCreamStores(loc) {
       console.log("You clicked button 8!");
       imgDiv.attr("src", imgArray[7]);
       $("#icecream-img").append(imgDiv);
+      $("#timerDisplay").attr("style", "display: inline-block");
       var timeEight = timeConvert(routeTime[7]);
       timerStart = timeEight;
       console.log(timeConvert(routeTime[7]));
@@ -412,6 +429,7 @@ function getIceCreamStores(loc) {
       console.log("You clicked button 9!");
       imgDiv.attr("src", imgArray[8]);
       $("#icecream-img").append(imgDiv);
+      $("#timerDisplay").attr("style", "display: inline-block");
       var timeNine = timeConvert(routeTime[8]);
       timerStart = timeNine;
       console.log(timeConvert(routeTime[8]));
@@ -437,6 +455,7 @@ function getIceCreamStores(loc) {
       console.log("You clicked button 10!");
       imgDiv.attr("src", imgArray[9]);
       $("#icecream-img").append(imgDiv);
+      $("#timerDisplay").attr("style", "display: inline-block");
       var timeTen = timeConvert(routeTime[9]);
       timerStart = timeTen;
       console.log(timeConvert(routeTime[9]));
