@@ -7,43 +7,35 @@ header {
   background-color: #b2d1e5;
   margin-top: 10px;
 }
-
 #freez {
-    color: #feb902;
+  color: #feb902;
 }
-
-#ER{
-color: #e13a32;
+#ER {
+  color: #e13a32;
 }
 body {
   background-color: #66a9d1;
   font-family: "Fredoka One", cursive;
 }
-
 #zipcode-submit {
   background-color: #feb902;
 }
-
 #middleCol {
-    background-color: #0a6082;
+  background-color: #0a6082;
 }
-
 #iceCreamStores {
   list-style-type: none;
 }
-
 .newIceCreamStoreButton {
   padding: 20px;
   margin-bottom: 2px;
 }
-
 .storeLinkButton {
   padding: 20px;
   margin-top: 5px;
   background-color: #b2d1e5;
   color: whitesmoke;
 }
-
 #storeHeader {
   margin-left: auto;
   margin-right: auto;
@@ -58,34 +50,30 @@ img {
   margin-left: auto;
   margin-right: auto;
 }
-
+#timerDisplay {
+  display: none;
+}
 #button1 {
   background-color: #ff75a8;
   color: whitesmoke;
 }
-
 #button2 {
   background-color: #e0dbbf;
 }
-
 #button3 {
   background-color: #562a1c;
   color: whitesmoke;
 }
-
 #button4 {
   background-color: #accc40;
 }
-
 #button5 {
   background-color: #efd19b;
 }
-
 #button6 {
   background-color: #ff75a8;
   color: whitesmoke;
 }
-
 #button7 {
   background-color: #e0dbbf;
 }

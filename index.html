@@ -1,84 +1,99 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>freezER</title>
-  <link rel="stylesheet"
-    href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
-    integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk"
-    crossorigin="anonymous" />
-  <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap"
-    rel="stylesheet" />
-  <link rel="stylesheet" href="style.css" />
-</head>
-
-<body>
-  <header id="freezer-title">
-    <div class="row">
-      <div class="col-sm-12">
-        <h1><span id="freez">freez</span><span id="ER">ER</span></h1>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>freezER</title>
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+      integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk"
+      crossorigin="anonymous"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+​
+  <body>
+    <header id="freezer-title">
+      <div class="row">
+        <div class="col-sm-12">
+          <h1><span id="freez">freez</span><span id="ER">ER</span></h1>
+        </div>
       </div>
-    </div>
-  </header>
-  <main>
-    <div class="row">
-      <div class="col-sm-4" class="search-area" id="left-col">
-        <div class="jumbotron">
-          <div class="input-group mb-3">
-            <div class="col-sm-10">
-              <input type="text" class="form-control"
-                placeholder="Search by Zip Code" aria-label="Zip Code"
-                aria-describedby="button-addon2" id="zipcode-input" />
-            </div>
-            <div class="col-sm-2">
-              <div class="input-group-append">
-                <button class="btn btn-outline-secondary row" type="button"
-                  id="zipcode-submit">
-                  Button
-                </button>
+    </header>
+    <main>
+      <div class="row">
+        <div class="col-sm-4" class="search-area" id="left-col">
+          <div class="jumbotron">
+            <div class="input-group mb-3">
+              <div class="col-sm-10">
+                <input
+                  type="text"
+                  class="form-control"
+                  placeholder="Search by Zip Code"
+                  aria-label="Zip Code"
+                  aria-describedby="button-addon2"
+                  id="zipcode-input"
+                />
+              </div>
+              <div class="col-sm-2">
+                <div class="input-group-append">
+                  <button
+                    class="btn btn-outline-secondary row"
+                    type="button"
+                    id="zipcode-submit"
+                  >
+                    Button
+                  </button>
+                </div>
               </div>
             </div>
-          </div>
-          <div class="ul" id="iceCreamStores"></div>
-        </div>
-      </div>
-      <div class="col-sm-4" class="timer-area" id="middle-col">
-        <div class="jumbotron" id="middleCol">
-          <div class="row">
-            <h2 id="storeHeader"></h2>
-          </div>
-          <div id="icecream-img" class="row"></div>
-          <div class="row" id="storeURLButton">
-            <a href=""></a>
+            <div class="ul" id="iceCreamStores"></div>
           </div>
         </div>
-      </div>
-      <div class="col-sm-4" class="map-area" id="right-col">
-        <div   class="jumbotron">
-                    <h2>Directions </h2>
-
-          <ol id="routeNarrativeOl"></ol>
-
+        <div class="col-sm-4" class="timer-area" id="middle-col">
+          <div class="jumbotron" id="middleCol">
+            <div class="row">
+              <h2 id="storeHeader"></h2>
+            </div>
+            <div id="icecream-img" class="row"></div>
+            <div class="row" id="storeURLButton">
+              <a href=""></a>
+            </div>
+          </div>
+        </div>
+        <div class="col-sm-4" class="map-area" id="right-col">
+          <div class="jumbotron">
+            <div class="div">
+              <h2>Timer: <span id="timerDisplay"></span></h2>
+            </div>
+            <h2>Directions</h2>
+​
+            <ol id="routeNarrativeOl"></ol>
+          </div>
         </div>
       </div>
-    </div>
-  </main>
-  <script src="https://code.jquery.com/jquery-3.5.1.min.js"
-    integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0="
-    crossorigin="anonymous"></script>
-  <script
-    src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
-    integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
-    crossorigin="anonymous"></script>
-  <script
-    src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"
-    integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI"
-    crossorigin="anonymous"></script>
-  <script
-    src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-  <script src="script.js"></script>
-</body>
-
+    </main>
+    <script
+      src="https://code.jquery.com/jquery-3.5.1.min.js"
+      integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0="
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+      integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"
+      integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI"
+      crossorigin="anonymous"
+    ></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="script.js"></script>
+  </body>
 </html>
